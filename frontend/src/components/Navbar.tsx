@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
+import GoogleAuth from './GoogleAuth';
 
 const Navbar: React.FC = () => {
+  const [user, setUser] = useState<any>(null); 
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <a className="navbar-brand" href="#home">Dailies App</a>
@@ -20,6 +23,11 @@ const Navbar: React.FC = () => {
           </li>
         </ul>
       </div>
+
+      <div style={{ marginRight: 8 }}>
+        <GoogleAuth setUser={setUser} />  {/* Pass the setUser function to GoogleAuth */}
+      </div>
+
     </nav>
   );
 };
