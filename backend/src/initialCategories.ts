@@ -1,5 +1,17 @@
 import { Category } from '../../shared/classes/category';
 
+export enum CategoryEnum {
+    JOKE = "joke",
+    FACT = "fact",
+    RIDDLE = "riddle",
+    QUOTE = "quote", 
+    POEM = "poem",
+    PICTURE = "picture",
+    COMIC = "comic",
+    TROPE = "trope",
+    QUIZ = "quiz"
+}
+
 export const initialCategories: Category[] = [
     { id: 1, name: "Joke" },
     { id: 2, name: "Fact" },

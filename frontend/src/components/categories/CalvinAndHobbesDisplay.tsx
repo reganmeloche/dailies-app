@@ -6,7 +6,7 @@ const CalvinAndHobbesDisplay: React.FC = () => {
 
     useEffect(() => {
         const fetchQuote = async () => {
-            const response = await fetch('/api/calvin');
+            const response = await fetch('/api/comic');
             const data = await response.json();
             console.log(data)
             setComic(data);

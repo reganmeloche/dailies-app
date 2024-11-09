@@ -4,34 +4,45 @@ import Quote, {sampleQuotes} from '../../shared/classes/quote';
 import Fact, {sampleFacts} from '../../shared/classes/fact';
 import CalvinAndHobbes, {sampleCalvin} from '../../shared/classes/calvinAndHobbes';
 import { IComicLib } from './comicLib';
+import { IJokeLib } from './jokeLib';
 
 class MainLib {
     private categories: Category[] = [];
     private comicLib: IComicLib;
+    private jokeLib: IJokeLib;
 
     constructor(
         initialCategories: Category[],
-        comicLib: IComicLib
+        comicLib: IComicLib,
+        jokeLib: IJokeLib,
     ) {
-        this.categories = initialCategories
-        this.comicLib = comicLib
+        this.categories = initialCategories;
+        this.comicLib = comicLib;
+        this.jokeLib = jokeLib;
     }
   
+    private sleep(ms: number): Promise<void> {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+
     public getCategories(): Category[] {
-      return this.categories;
+        return this.categories;
     }
 
-    public getJoke(): Joke {
-      const randomIndex = Math.floor(Math.random() * sampleJokes.length);
-      return sampleJokes[randomIndex]; 
+    public async getJoke(): Promise<Joke> {
+        return await this.jokeLib.fetchJoke();
     }
 
-    public getQuote(): Quote {
-      const randomIndex = Math.floor(Math.random() * sampleQuotes.length);
-      return sampleQuotes[randomIndex]; 
+    public async getQuote(): Promise<Quote> {
+        await this.sleep(1000);
+
+        const randomIndex = Math.floor(Math.random() * sampleQuotes.length);
+        return sampleQuotes[randomIndex]; 
     }
 
-    public getFact(): Fact {
+    public async getFact(): Promise<Fact> {
+        await this.sleep(1000);
+
         const randomIndex = Math.floor(Math.random() * sampleFacts.length);
         return sampleFacts[randomIndex]; 
     }
@@ -39,6 +50,7 @@ class MainLib {
     public async getCalvinAndHobbes(): Promise<CalvinAndHobbes> {
         let result = await this.comicLib.fetchComic();
         
+        // TODO: CLEANUP
         if (!result) {
             console.log('ERROR FETCHING CALVIN AND HOBBES');
             const randomIndex = Math.floor(Math.random() * sampleCalvin.length);
