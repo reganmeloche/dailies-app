@@ -1,4 +1,3 @@
-import { Category } from '../../shared/classes/category';
 import Joke, {sampleJokes} from '../../shared/classes/joke';
 import Quote, {sampleQuotes} from '../../shared/classes/quote';
 import Fact, {sampleFacts} from '../../shared/classes/fact';
@@ -7,16 +6,13 @@ import { IComicLib } from './comicLib';
 import { IJokeLib } from './jokeLib';
 
 class MainLib {
-    private categories: Category[] = [];
     private comicLib: IComicLib;
     private jokeLib: IJokeLib;
 
     constructor(
-        initialCategories: Category[],
         comicLib: IComicLib,
         jokeLib: IJokeLib,
     ) {
-        this.categories = initialCategories;
         this.comicLib = comicLib;
         this.jokeLib = jokeLib;
     }
@@ -24,10 +20,6 @@ class MainLib {
     private sleep(ms: number): Promise<void> {
         return new Promise(resolve => setTimeout(resolve, ms));
       }
-
-    public getCategories(): Category[] {
-        return this.categories;
-    }
 
     public async getJoke(): Promise<Joke> {
         return await this.jokeLib.fetchJoke();

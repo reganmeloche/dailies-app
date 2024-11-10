@@ -1,11 +1,7 @@
 import express from 'express';
-
-import MainLib from './mainLib';
-import { CategoryEnum, initialCategories } from './initialCategories';
-import ComicLib from './comicLib';
-import JokeLib from './jokeLib';
-import NinjaApi from './ninjaApi';
-import CacheLib from './cacheLib';
+import { CategoryEnum } from './initialCategories';
+import setup from './setup';
+import { Config } from './config';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -13,19 +9,19 @@ const PORT = process.env.PORT || 3001;
 // Middleware to parse JSON
 app.use(express.json());
 
-// TODO: Hide the api key in secrets
-// TODO: Separate file for DI
-const ninjaApi = new NinjaApi('API-KEY');
-const lib = new MainLib(
-    initialCategories,
-    new ComicLib(),
-    new JokeLib(ninjaApi)
-);
+// Get config
+let config: Config;
+if (process.env.NODE_ENV === 'development') {
+    config = require('./configdev').default;
+} else {
+    config = require('./config').default;
+}
 
-const cacheLib = new CacheLib(lib);
+// Setup
+const { cacheLib, categories } = setup(config);
 
 app.get('/api/categories', (req, res) => {
-    res.json(lib.getCategories());
+    res.json(categories);
 });
 
 app.get('/api/:category', async (req, res) => {
@@ -33,7 +29,6 @@ app.get('/api/:category', async (req, res) => {
     const result = await cacheLib.get(category, req.query.clear == 'true');
     res.json(result);
 });
-
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

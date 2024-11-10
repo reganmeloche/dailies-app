@@ -1,5 +1,6 @@
 import MainLib from './mainLib';
 import { CategoryEnum } from './initialCategories';
+import { Category } from '../../shared/classes/category';
 
 type FetchFunction<T> = () => Promise<T>;
 
@@ -27,20 +28,16 @@ class CacheLib {
 
     public async get<T>(category:CategoryEnum, getNew:boolean = false): Promise<T> {
         const cacheKey: string = category; 
+        const cachedResult = this.tryGetCache<T>(cacheKey);
 
-        const result = this.tryGetCache<T>(cacheKey);
-
-        if (getNew || result == null) {
-            // fetch
-            const result = await this.fetchFunctions[category]();
-
-            // store
+        if (getNew || cachedResult == null) {
+            const fetchedResult = await this.fetchFunctions[category]();
             const expirationTime = this.getEndofDay();
-            this.cache.set(cacheKey, { value: result, expiration: expirationTime });
+            this.cache.set(cacheKey, { value: fetchedResult, expiration: expirationTime });
             
-            return result;
+            return fetchedResult;
         } else {
-            return result;
+            return cachedResult;
         }
     }
 
