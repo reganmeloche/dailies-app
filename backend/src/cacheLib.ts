@@ -1,18 +1,18 @@
-import MainLib from './mainLib';
+import IMainLib, { CacheKey } from './interfaces/IMainLib';
 import { CategoryEnum } from './initialCategories';
 
-type FetchFunction<T> = () => Promise<T>;
+type FetchFunction<CacheKey> = () => Promise<CacheKey>;
 
 class CacheLib {
-    private mainLib: MainLib;
-    private cache: Map<string, { value: any; expiration: number }>;
+    private mainLib: IMainLib;
+    private cache: Map<string, { value: CacheKey; expiration: number }>;
     
-    constructor(mainLib: MainLib) {
+    constructor(mainLib: IMainLib, initialCache: Map<string, { value: CacheKey; expiration: number }> = new Map()) {
         this.mainLib = mainLib;
-        this.cache = new Map();
+        this.cache = initialCache;
     }
 
-    private fetchFunctions: { [key in CategoryEnum]: FetchFunction<any> } = {
+    private fetchFunctions: { [key in CategoryEnum]: FetchFunction<CacheKey> } = {
         [CategoryEnum.JOKE]: () => this.mainLib.getJoke(),
         [CategoryEnum.COMIC]: () => this.mainLib.getCalvinAndHobbes(),
         [CategoryEnum.FACT]: () => this.mainLib.getFact(),
@@ -25,9 +25,9 @@ class CacheLib {
         [CategoryEnum.QUIZ]: () => this.mainLib.getCalvinAndHobbes(),
     };
 
-    public async get<T>(category:CategoryEnum, getNew:boolean = false): Promise<T> {
+    public async get(category:CategoryEnum, getNew:boolean = false): Promise<CacheKey> {
         const cacheKey: string = category; 
-        const cachedResult = this.tryGetCache<T>(cacheKey);
+        const cachedResult = this.tryGetCache(cacheKey);
 
         if (getNew || cachedResult == null) {
             const fetchedResult = await this.fetchFunctions[category]();
@@ -49,7 +49,7 @@ class CacheLib {
         return midnight.getTime();
     }
 
-    public tryGetCache<T>(cacheKey:string): T | null {
+    public tryGetCache(cacheKey:string): CacheKey | null {
         const cached = this.cache.get(cacheKey);
 
         if (!cached) { return null; }

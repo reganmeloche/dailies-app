@@ -1,4 +1,4 @@
-import Riddle, { sampleRiddles } from '../../shared/classes/riddle';
+import Riddle from '../../shared/classes/riddle';
 import { INinjaApi } from './ninjaApi';
 
 export interface IRiddleLib {

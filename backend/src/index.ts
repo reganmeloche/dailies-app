@@ -12,8 +12,10 @@ app.use(express.json());
 // Get config
 let config: Config;
 if (process.env.NODE_ENV === 'development') {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     config = require('./configdev').default;
 } else {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     config = require('./config').default;
 }
 

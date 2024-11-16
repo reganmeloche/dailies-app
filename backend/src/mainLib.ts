@@ -9,8 +9,9 @@ import { IRiddleLib } from './riddleLib';
 import { IPoemLib } from './poemLib';
 import Riddle from '../../shared/classes/riddle';
 import Poem from '../../shared/classes/poem';
+import IMainLib from './interfaces/IMainLib';
 
-class MainLib {
+class MainLib implements IMainLib {
     private comicLib: IComicLib;
     private jokeLib: IJokeLib;
     private quoteLib: IQuoteLib;
