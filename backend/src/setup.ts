@@ -6,6 +6,10 @@ import MainLib from "./mainLib";
 import NinjaApi from "./ninjaApi";
 import { Config } from './config';
 import { Category } from "../../shared/classes/category";
+import QuoteLib from "./quoteLib";
+import RiddleLib from "./riddleLib";
+import PoemLib from "./poemLib";
+import PoemApi from "./poemApi";
 
 interface Services {
     cacheLib: CacheLib,
@@ -15,10 +19,15 @@ interface Services {
 
 function setup(config: Config): Services {
     const ninjaApi = new NinjaApi(config.ninjasApiKey);
+    const poemApi = new PoemApi();
 
     const lib = new MainLib(
         new ComicLib(),
-        new JokeLib(ninjaApi)
+        new JokeLib(ninjaApi),
+        new QuoteLib(ninjaApi),
+        new RiddleLib(ninjaApi),
+        new PoemLib(poemApi),
+
     );
 
     const services: Services = {
@@ -26,7 +35,7 @@ function setup(config: Config): Services {
         categories: initialCategories
         //...
     };
-
+    
     return services;
 };
 

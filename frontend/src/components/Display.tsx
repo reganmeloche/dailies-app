@@ -3,6 +3,8 @@ import JokeDisplay from './categories/JokeDisplay';
 import FactDisplay from './categories/FactDisplay';
 import QuoteDisplay from './categories/QuoteDisplay';
 import CalvinAndHobbesDisplay from './categories/CalvinAndHobbesDisplay';
+import RiddleDisplay from './categories/RiddleDisplay';
+import PoemDisplay from './categories/PoemDisplay';
 
 interface DisplayProps {
     selectedId: number;
@@ -13,19 +15,25 @@ const Display: React.FC<DisplayProps> = ({ selectedId }) => {
 
     switch (selectedId) {
         case 1:
-          content = <JokeDisplay />;
-          break;
+          	content = <JokeDisplay />;
+          	break;
         case 2:
-          content = <FactDisplay />;
-          break;
+          	content = <FactDisplay />;
+          	break;
+        case 3:
+            content = <RiddleDisplay />;
+            break;
         case 4:
-          content = <QuoteDisplay />;
-          break;  
+          	content = <QuoteDisplay />;
+          	break; 
+		case 5:
+			content = <PoemDisplay />;
+			break;  
         case 7:
-          content = <CalvinAndHobbesDisplay />;
-          break;
+          	content = <CalvinAndHobbesDisplay />;
+          	break;
         default:
-          content = <div>Select a valid ID</div>;
+          	content = <div>Select a valid ID</div>;
       }
     
     return (

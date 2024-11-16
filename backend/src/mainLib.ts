@@ -1,20 +1,37 @@
-import Joke, {sampleJokes} from '../../shared/classes/joke';
-import Quote, {sampleQuotes} from '../../shared/classes/quote';
+import Joke from '../../shared/classes/joke';
+import Quote from '../../shared/classes/quote';
 import Fact, {sampleFacts} from '../../shared/classes/fact';
 import CalvinAndHobbes, {sampleCalvin} from '../../shared/classes/calvinAndHobbes';
 import { IComicLib } from './comicLib';
 import { IJokeLib } from './jokeLib';
+import { IQuoteLib } from './quoteLib';
+import { IRiddleLib } from './riddleLib';
+import { IPoemLib } from './poemLib';
+import Riddle from '../../shared/classes/riddle';
+import Poem from '../../shared/classes/poem';
 
 class MainLib {
     private comicLib: IComicLib;
     private jokeLib: IJokeLib;
+    private quoteLib: IQuoteLib;
+    private riddleLib: IRiddleLib;
+    private poemLib: IPoemLib;
+
 
     constructor(
         comicLib: IComicLib,
         jokeLib: IJokeLib,
+        quoteLib: IQuoteLib,
+        riddleLib: IRiddleLib,
+        poemLib: IPoemLib,
+
     ) {
         this.comicLib = comicLib;
         this.jokeLib = jokeLib;
+        this.quoteLib = quoteLib;
+        this.riddleLib = riddleLib;
+        this.poemLib = poemLib;
+
     }
   
     private sleep(ms: number): Promise<void> {
@@ -26,10 +43,15 @@ class MainLib {
     }
 
     public async getQuote(): Promise<Quote> {
-        await this.sleep(1000);
+        return await this.quoteLib.fetchQuote();
+    }
 
-        const randomIndex = Math.floor(Math.random() * sampleQuotes.length);
-        return sampleQuotes[randomIndex]; 
+    public async getRiddle(): Promise<Riddle> {
+        return await this.riddleLib.fetchRiddle();
+    }
+
+    public async getPoem(): Promise<Poem> {
+        return await this.poemLib.fetchPoem();
     }
 
     public async getFact(): Promise<Fact> {

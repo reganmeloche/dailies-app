@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Joke from '../../../../shared/classes/joke';
+import './JokeDisplay.css';
 
 const JokeDisplay: React.FC = () => {
     const [joke, setJoke] = useState<Joke | null>(null);
@@ -16,10 +17,10 @@ const JokeDisplay: React.FC = () => {
 
     if (!joke) { return <p>Loading...</p>}
     return (
-        <div>
-            <h3>Joke</h3>
-            <p>{joke.question}</p>
-            <p>{joke.punchline}</p>
+        <div className="joke-container">
+            <h3 className="joke-title">Joke of the Day</h3>
+            <p className="joke-question">{joke.question}</p>
+            <p className="joke-punchline">{joke.punchline}</p>
         </div>
     );
 };

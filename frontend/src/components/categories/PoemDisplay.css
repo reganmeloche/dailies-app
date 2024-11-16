@@ -1,0 +1,56 @@
+/* PoemDisplay.css */
+.poem-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Georgia', serif;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+  }
+  
+  .poem-title {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .poem-meta {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    color: #555;
+  }
+  
+  .poem-meta-item {
+    margin: 5px 0;
+  }
+  
+  .poem-meta-item strong {
+    font-weight: bold;
+  }
+  
+  .poem-stanzas {
+    margin-top: 20px;
+  }
+  
+  .stanza {
+    margin-bottom: 20px;
+  }
+  
+  .stanza-line {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #333;
+    text-align: justify;
+    margin: 5px 0;
+  }
+  
+  .stanza + .stanza {
+    padding-top: 20px;
+  }
+  
+  .poem-container br {
+    margin-bottom: 20px;
+  }
+  

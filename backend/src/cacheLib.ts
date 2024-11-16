@@ -1,6 +1,5 @@
 import MainLib from './mainLib';
 import { CategoryEnum } from './initialCategories';
-import { Category } from '../../shared/classes/category';
 
 type FetchFunction<T> = () => Promise<T>;
 
@@ -18,11 +17,11 @@ class CacheLib {
         [CategoryEnum.COMIC]: () => this.mainLib.getCalvinAndHobbes(),
         [CategoryEnum.FACT]: () => this.mainLib.getFact(),
         [CategoryEnum.QUOTE]: () => this.mainLib.getQuote(),
+        [CategoryEnum.POEM]: () => this.mainLib.getPoem(),
+        [CategoryEnum.RIDDLE]: () => this.mainLib.getRiddle(),
 
         [CategoryEnum.PICTURE]: () => this.mainLib.getFact(),
-        [CategoryEnum.POEM]: () => this.mainLib.getCalvinAndHobbes(),
         [CategoryEnum.TROPE]: () => this.mainLib.getCalvinAndHobbes(),
-        [CategoryEnum.RIDDLE]: () => this.mainLib.getCalvinAndHobbes(),
         [CategoryEnum.QUIZ]: () => this.mainLib.getCalvinAndHobbes(),
     };
 
