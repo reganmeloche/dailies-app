@@ -21,7 +21,7 @@ class CacheLib {
         [CategoryEnum.RIDDLE]: () => this.mainLib.getRiddle(),
 
         [CategoryEnum.PICTURE]: () => this.mainLib.getFact(),
-        [CategoryEnum.TROPE]: () => this.mainLib.getCalvinAndHobbes(),
+        [CategoryEnum.TROPE]: () => this.mainLib.getTrope(),
         [CategoryEnum.QUIZ]: () => this.mainLib.getCalvinAndHobbes(),
     };
 

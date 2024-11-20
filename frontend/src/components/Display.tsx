@@ -3,6 +3,7 @@ import JokeDisplay from './categories/JokeDisplay';
 import FactDisplay from './categories/FactDisplay';
 import QuoteDisplay from './categories/QuoteDisplay';
 import CalvinAndHobbesDisplay from './categories/CalvinAndHobbesDisplay';
+import TropeDisplay from './categories/TropeDisplay';
 import RiddleDisplay from './categories/RiddleDisplay';
 import PoemDisplay from './categories/PoemDisplay';
 
@@ -32,6 +33,9 @@ const Display: React.FC<DisplayProps> = ({ selectedId }) => {
         case 7:
           	content = <CalvinAndHobbesDisplay />;
           	break;
+        case 8:
+            content = <TropeDisplay />;
+            break;
         default:
           	content = <div>Select a valid ID</div>;
       }

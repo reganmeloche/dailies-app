@@ -4,8 +4,9 @@ import Fact from '../../../shared/classes/fact';
 import CalvinAndHobbes from '../../../shared/classes/calvinAndHobbes';
 import Riddle from '../../../shared/classes/riddle';
 import Poem from '../../../shared/classes/poem';
+import Trope from '../../../shared/classes/trope';
 
-export type CacheKey = Joke | Riddle | Poem | Quote | Fact | CalvinAndHobbes;
+export type CacheKey = Joke | Riddle | Poem | Quote | Fact | CalvinAndHobbes | Trope;
 
 export default interface IMainLib {
     getJoke(): Promise<Joke>;
@@ -14,4 +15,5 @@ export default interface IMainLib {
     getPoem(): Promise<Poem>;
     getFact(): Promise<Fact>;
     getCalvinAndHobbes(): Promise<CalvinAndHobbes>;
+    getTrope(): Promise<Trope>
 } 

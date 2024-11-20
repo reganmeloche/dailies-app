@@ -10,6 +10,8 @@ import QuoteLib from "./quoteLib";
 import RiddleLib from "./riddleLib";
 import PoemLib from "./poemLib";
 import PoemApi from "./poemApi";
+import TropeLib from "./tropeLib";
+import TropeApi from "./tropeApi";
 
 interface Services {
     cacheLib: CacheLib,
@@ -20,6 +22,7 @@ interface Services {
 function setup(config: Config): Services {
     const ninjaApi = new NinjaApi(config.ninjasApiKey);
     const poemApi = new PoemApi();
+    const tropeApi = new TropeApi();
 
     const lib = new MainLib(
         new ComicLib(),
@@ -27,6 +30,7 @@ function setup(config: Config): Services {
         new QuoteLib(ninjaApi),
         new RiddleLib(ninjaApi),
         new PoemLib(poemApi),
+        new TropeLib(tropeApi),
 
     );
 

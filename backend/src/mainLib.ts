@@ -2,11 +2,13 @@ import Joke from '../../shared/classes/joke';
 import Quote from '../../shared/classes/quote';
 import Fact, {sampleFacts} from '../../shared/classes/fact';
 import CalvinAndHobbes, {sampleCalvin} from '../../shared/classes/calvinAndHobbes';
+import Trope from '../../shared/classes/trope';
 import { IComicLib } from './comicLib';
 import { IJokeLib } from './jokeLib';
 import { IQuoteLib } from './quoteLib';
 import { IRiddleLib } from './riddleLib';
 import { IPoemLib } from './poemLib';
+import { ITropeLib } from './tropeLib';
 import Riddle from '../../shared/classes/riddle';
 import Poem from '../../shared/classes/poem';
 import IMainLib from './interfaces/IMainLib';
@@ -17,6 +19,7 @@ class MainLib implements IMainLib {
     private quoteLib: IQuoteLib;
     private riddleLib: IRiddleLib;
     private poemLib: IPoemLib;
+    private tropeLib: ITropeLib;
 
 
     constructor(
@@ -25,6 +28,7 @@ class MainLib implements IMainLib {
         quoteLib: IQuoteLib,
         riddleLib: IRiddleLib,
         poemLib: IPoemLib,
+        tropeLib: ITropeLib,
 
     ) {
         this.comicLib = comicLib;
@@ -32,6 +36,7 @@ class MainLib implements IMainLib {
         this.quoteLib = quoteLib;
         this.riddleLib = riddleLib;
         this.poemLib = poemLib;
+        this.tropeLib = tropeLib;
 
     }
   
@@ -53,6 +58,10 @@ class MainLib implements IMainLib {
 
     public async getPoem(): Promise<Poem> {
         return await this.poemLib.fetchPoem();
+    }
+
+    public async getTrope(): Promise<Trope> {
+        return await this.tropeLib.fetchTrope();
     }
 
     public async getFact(): Promise<Fact> {
