@@ -28,3 +28,5 @@ frontend/node_modules
 backend/node_modules
 todo.txt
 configdev.ts
+settings.json
+.env
