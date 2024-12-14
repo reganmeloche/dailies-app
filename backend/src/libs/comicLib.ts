@@ -1,6 +1,6 @@
 import axios from 'axios';
 import * as cheerio from 'cheerio';
-import CalvinAndHobbes from '../../shared/classes/calvinAndHobbes';
+import CalvinAndHobbes from '../classes/calvinAndHobbes';
 
 export interface IComicLib {
     fetchComic(): Promise<CalvinAndHobbes | null>;

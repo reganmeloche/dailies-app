@@ -1,4 +1,4 @@
-import ComicLib from '../src/comicLib';
+import ComicLib from '../src/libs/comicLib';
 
 describe('ComicLib Tests', () => {
     let sut: ComicLib;

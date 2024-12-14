@@ -1,5 +1,5 @@
-import Trope from '../../shared/classes/trope';
-import ITropeApi from './tropeApi';
+import Trope from '../classes/trope';
+import ITropeApi from '../helpers/tropeApi';
 
 export interface ITropeLib {
     fetchTrope(): Promise<Trope>;

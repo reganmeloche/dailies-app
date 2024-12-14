@@ -1,5 +1,5 @@
-import Poem from '../../shared/classes/poem';
-import { IPoemApi } from './poemApi';
+import Poem from '../classes/poem';
+import { IPoemApi } from '../helpers/poemApi';
 
 export interface IPoemLib {
     fetchPoem(): Promise<Poem>;

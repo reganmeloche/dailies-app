@@ -1,20 +1,20 @@
 import CacheLib from "./cacheLib";
-import ComicLib from "./comicLib";
-import { initialCategories } from "./initialCategories";
-import JokeLib from "./jokeLib";
+import ComicLib from "./libs/comicLib";
+import { initialCategories } from "./helpers/initialCategories";
+import JokeLib from "./libs/jokeLib";
 import MainLib from "./mainLib";
-import NinjaApi from "./ninjaApi";
+import NinjaApi from "./helpers/ninjaApi";
 import { Config } from './config';
-import { Category } from "../../shared/classes/category";
-import QuoteLib from "./quoteLib";
-import RiddleLib from "./riddleLib";
-import PoemLib from "./poemLib";
-import PoemApi from "./poemApi";
-import TropeLib from "./tropeLib";
-import TropeApi from "./tropeApi";
-import FactLib from "./factLib";
-import UnsplashApi from "./unsplashApi";
-import PictureLib from "./pictureLib";
+import { Category } from "./classes/category";
+import QuoteLib from "./libs/quoteLib";
+import RiddleLib from "./libs/riddleLib";
+import PoemLib from "./libs/poemLib";
+import PoemApi from "./helpers/poemApi";
+import TropeLib from "./libs/tropeLib";
+import TropeApi from "./helpers/tropeApi";
+import FactLib from "./libs/factLib";
+import UnsplashApi from "./helpers/unsplashApi";
+import PictureLib from "./libs/pictureLib";
 
 interface Services {
     cacheLib: CacheLib,

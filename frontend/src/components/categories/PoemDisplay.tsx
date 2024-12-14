@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Poem from '../../../../shared/classes/poem';
+import Poem from '../../../../backend/src/classes/poem';
 import './PoemDisplay.css';
 
 const PoemDisplay: React.FC = () => {

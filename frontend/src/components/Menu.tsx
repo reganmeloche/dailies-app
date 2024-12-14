@@ -1,5 +1,5 @@
 import React from 'react';
-import { Category } from '../../../shared/classes/category';
+import { Category } from '../../../backend/src/classes/category';
 
 interface MenuProps {
     items: Category[];

@@ -1,6 +1,6 @@
-import Picture from '../../shared/classes/picture';
-import { INinjaApi } from './ninjaApi';
-import { IUnsplashApi } from './unsplashApi';
+import Picture from '../classes/picture';
+import { INinjaApi } from '../helpers/ninjaApi';
+import { IUnsplashApi } from '../helpers/unsplashApi';
 
 export interface IPictureLib {
     fetchPicture(): Promise<Picture>;

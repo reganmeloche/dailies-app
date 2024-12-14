@@ -1,5 +1,5 @@
-import Fact from '../../shared/classes/fact';
-import { INinjaApi } from './ninjaApi';
+import Fact from '../classes/fact';
+import { INinjaApi } from '../helpers/ninjaApi';
 
 export interface IFactLib {
     fetchFact(): Promise<Fact>;

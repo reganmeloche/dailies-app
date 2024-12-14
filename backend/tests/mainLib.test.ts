@@ -1,18 +1,18 @@
 import { mock } from 'ts-jest-mocker';
 import _ from 'lodash';
 import MainLib from '../src/mainLib';
-import { IJokeLib } from '../src/jokeLib';
-import { IRiddleLib } from '../src/riddleLib';
-import { IQuoteLib } from '../src/quoteLib';
-import { IPoemLib } from '../src/poemLib';
-import { IComicLib } from '../src/comicLib';
-import { sampleJokes } from '../../shared/classes/joke';
-import { sampleCalvin } from '../../shared/classes/calvinAndHobbes';
-import { sampleQuotes } from '../../shared/classes/quote';
-import { sampleRiddles } from '../../shared/classes/riddle';
-import { samplePoems } from '../../shared/classes/poem';
-import { IFactLib } from '../src/factLib';
-import { ITropeLib } from '../src/tropeLib';
+import { IJokeLib } from '../src/libs/jokeLib';
+import { IRiddleLib } from '../src/libs/riddleLib';
+import { IQuoteLib } from '../src/libs/quoteLib';
+import { IPoemLib } from '../src/libs/poemLib';
+import { IComicLib } from '../src/libs/comicLib';
+import { sampleJokes } from '../src/classes/joke';
+import { sampleCalvin } from '../src/classes/calvinAndHobbes';
+import { sampleQuotes } from '../src/classes/quote';
+import { sampleRiddles } from '../src/classes/riddle';
+import { samplePoems } from '../src/classes/poem';
+import { IFactLib } from '../src/libs/factLib';
+import { ITropeLib } from '../src/libs/tropeLib';
 
 describe('MainLib Tests', () => {
     let comicLib: jest.Mocked<IComicLib>;

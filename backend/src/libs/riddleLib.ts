@@ -1,5 +1,5 @@
-import Riddle from '../../shared/classes/riddle';
-import { INinjaApi } from './ninjaApi';
+import Riddle from '../classes/riddle';
+import { INinjaApi } from '../helpers/ninjaApi';
 
 export interface IRiddleLib {
     fetchRiddle(): Promise<Riddle>;

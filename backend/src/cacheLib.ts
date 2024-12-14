@@ -1,5 +1,5 @@
 import IMainLib, { CacheKey } from './interfaces/IMainLib';
-import { CategoryEnum } from './initialCategories';
+import { CategoryEnum } from './helpers/initialCategories';
 
 type FetchFunction<CacheKey> = () => Promise<CacheKey>;
 

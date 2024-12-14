@@ -1,11 +1,11 @@
-import Joke from '../../../shared/classes/joke';
-import Quote from '../../../shared/classes/quote';
-import Fact from '../../../shared/classes/fact';
-import CalvinAndHobbes from '../../../shared/classes/calvinAndHobbes';
-import Riddle from '../../../shared/classes/riddle';
-import Poem from '../../../shared/classes/poem';
-import Trope from '../../../shared/classes/trope';
-import Picture from '../../../shared/classes/picture';
+import Joke from '../classes/joke';
+import Quote from '../classes/quote';
+import Fact from '../classes/fact';
+import CalvinAndHobbes from '../classes/calvinAndHobbes';
+import Riddle from '../classes/riddle';
+import Poem from '../classes/poem';
+import Trope from '../classes/trope';
+import Picture from '../classes/picture';
 
 export type CacheKey = Joke | Riddle | Poem | Quote | Fact | CalvinAndHobbes | Trope | Picture;
 

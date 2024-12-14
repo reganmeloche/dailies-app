@@ -1,5 +1,5 @@
 import axios from 'axios';
-import Picture from '../../shared/classes/picture';
+import Picture from '../classes/picture';
 
 export interface IUnsplashApi {
     getRandomPicture(): Promise<Picture>;

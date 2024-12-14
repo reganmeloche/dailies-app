@@ -1,8 +1,8 @@
 import { mock } from 'ts-jest-mocker';
 import _ from 'lodash';
-import PoemLib from '../src/poemLib';
-import { IPoemApi } from '../src/poemApi';
-import { samplePoems } from '../../shared/classes/poem';
+import PoemLib from '../src/libs/poemLib';
+import { IPoemApi } from '../src/helpers/poemApi';
+import { samplePoems } from '../src/classes/poem';
 
 describe('PoemLib Tests', () => {
     let api: jest.Mocked<IPoemApi>;

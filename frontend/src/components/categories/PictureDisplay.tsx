@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Picture from '../../../../shared/classes/picture';
+import Picture from '../../../../backend/src/classes/picture';
 
 const PictureDisplay: React.FC = () => {
     const [picture, setPicture] = useState<Picture | null>(null);
@@ -21,7 +21,6 @@ const PictureDisplay: React.FC = () => {
             <p className="picture-title">{picture.title}</p>
             <img src={picture.url} width="400px"/>
         </div>
-
     );
 };
 

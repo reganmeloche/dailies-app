@@ -1,5 +1,5 @@
-import Joke from '../../shared/classes/joke';
-import { INinjaApi } from './ninjaApi';
+import Joke from '../classes/joke';
+import { INinjaApi } from '../helpers/ninjaApi';
 
 export interface IJokeLib {
     fetchJoke(): Promise<Joke>;

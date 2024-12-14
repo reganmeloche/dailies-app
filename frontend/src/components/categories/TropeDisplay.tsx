@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Trope from '../../../../shared/classes/trope';
+import Trope from '../../../../backend/src/classes/trope';
 //import './TropeDisplay.css';
 
 const TropeDisplay: React.FC = () => {

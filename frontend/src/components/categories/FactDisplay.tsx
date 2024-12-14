@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Fact from '../../../../shared/classes/fact';
+import Fact from '../../../../backend/src/classes/fact';
 
 const FactDisplay: React.FC = () => {
     const [fact, setFact] = useState<Fact | null>(null);

@@ -1,5 +1,5 @@
-import Quote from '../../shared/classes/quote';
-import { INinjaApi } from './ninjaApi';
+import Quote from '../classes/quote';
+import { INinjaApi } from '../helpers/ninjaApi';
 
 export interface IQuoteLib {
     fetchQuote(): Promise<Quote>;

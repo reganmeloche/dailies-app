@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Quote from '../../../../shared/classes/quote';
+import Quote from '../../../../backend/src/classes/quote';
 
 const QuoteDisplay: React.FC = () => {
     const [quote, setQuote] = useState<Quote | null>(null);

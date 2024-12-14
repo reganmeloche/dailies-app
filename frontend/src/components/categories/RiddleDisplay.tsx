@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Riddle from '../../../../shared/classes/riddle';
+import Riddle from '../../../../backend/src/classes/riddle';
 
 const RiddleDisplay: React.FC = () => {
     const [riddle, setRiddle] = useState<Riddle | null>(null);

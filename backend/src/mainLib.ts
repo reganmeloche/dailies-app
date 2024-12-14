@@ -1,20 +1,20 @@
-import Joke from '../../shared/classes/joke';
-import Quote from '../../shared/classes/quote';
-import Fact, {sampleFacts} from '../../shared/classes/fact';
-import CalvinAndHobbes, {sampleCalvin} from '../../shared/classes/calvinAndHobbes';
-import Trope from '../../shared/classes/trope';
-import { IComicLib } from './comicLib';
-import { IJokeLib } from './jokeLib';
-import { IQuoteLib } from './quoteLib';
-import { IRiddleLib } from './riddleLib';
-import { IPoemLib } from './poemLib';
-import { ITropeLib } from './tropeLib';
-import Riddle from '../../shared/classes/riddle';
-import Poem from '../../shared/classes/poem';
+import Joke from './classes/joke';
+import Quote from './classes/quote';
+import Fact, {sampleFacts} from './classes/fact';
+import CalvinAndHobbes, {sampleCalvin} from './classes/calvinAndHobbes';
+import Trope from './classes/trope';
+import { IComicLib } from './libs/comicLib';
+import { IJokeLib } from './libs/jokeLib';
+import { IQuoteLib } from './libs/quoteLib';
+import { IRiddleLib } from './libs/riddleLib';
+import { IPoemLib } from './libs/poemLib';
+import { ITropeLib } from './libs/tropeLib';
+import Riddle from './classes/riddle';
+import Poem from './classes/poem';
 import IMainLib from './interfaces/IMainLib';
-import { IFactLib } from './factLib';
-import { IPictureLib } from './pictureLib';
-import Picture from '../../shared/classes/picture';
+import { IFactLib } from './libs/factLib';
+import { IPictureLib } from './libs/pictureLib';
+import Picture from './classes/picture';
 
 class MainLib implements IMainLib {
     private comicLib: IComicLib;

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import Poem, { Stanza } from '../../shared/classes/poem';
+import Poem, { Stanza } from '../classes/poem';
 
 export interface IPoemApi {
     getDailyPoem(): Promise<Poem>;

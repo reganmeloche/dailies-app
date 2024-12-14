@@ -1,4 +1,4 @@
-import UnsplashApi from '../src/unsplashApi';
+import UnsplashApi from '../src/helpers/unsplashApi';
 
 describe('Unsplash API Tests', () => {
     let sut: UnsplashApi;

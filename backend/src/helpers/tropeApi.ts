@@ -1,6 +1,6 @@
 import axios from 'axios';
 import * as cheerio from 'cheerio';
-import Trope from '../../shared/classes/trope';
+import Trope from '../classes/trope';
 
 export interface ITropeApi {
     getTrope(): Promise<Trope>;

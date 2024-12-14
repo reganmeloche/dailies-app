@@ -1,4 +1,4 @@
-import { Category } from '../../shared/classes/category';
+import { Category } from '../classes/category';
 
 export enum CategoryEnum {
     JOKE = "joke",
