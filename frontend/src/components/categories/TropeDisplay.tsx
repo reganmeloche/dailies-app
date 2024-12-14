@@ -17,17 +17,17 @@ const TropeDisplay: React.FC = () => {
 
     if (!trope) { return <p>Loading...</p>}
     return (
-        <div className="trope-container">
-            <h3 className="trope-title">{trope.title}</h3>
+        <div className="component-container">
+            <h3 className="component-title">Trope of the Day</h3>
+            <a className="trope-title" href={trope.link} target="_blank">{trope.title}</a>
             <div>
                 {trope.text.map((p, i) => (
                     <p key={i} className="trope-line">{p}</p>
                 ))}
             </div>
-
-            <p className="trope-link">{trope.link}</p>
             <img src={trope.pictureUrl} />
         </div>
+
     );
 };
 

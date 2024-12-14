@@ -17,8 +17,8 @@ const CalvinAndHobbesDisplay: React.FC = () => {
 
     if (!comic) { return <p>Loading...</p>}
     return (
-        <div>
-            <h3>Calvin and Hobbes</h3>
+        <div className="component-container">
+            <h3 className="component-title">Calvin and Hobbes</h3>
             <img src={comic.urlString}/>
         </div>
     );

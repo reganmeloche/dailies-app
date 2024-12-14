@@ -17,7 +17,7 @@ const PoemDisplay: React.FC = () => {
 
     if (!poem) { return <p>Loading...</p>}
     return (
-        <div className="poem-container">
+        <div className="component-container">
             <h3 className="poem-title">Poem</h3>
             
             <div className="poem-meta">

@@ -19,10 +19,9 @@ class CacheLib {
         [CategoryEnum.QUOTE]: () => this.mainLib.getQuote(),
         [CategoryEnum.POEM]: () => this.mainLib.getPoem(),
         [CategoryEnum.RIDDLE]: () => this.mainLib.getRiddle(),
-
-        [CategoryEnum.PICTURE]: () => this.mainLib.getFact(),
+        [CategoryEnum.PICTURE]: () => this.mainLib.getPicture(),
         [CategoryEnum.TROPE]: () => this.mainLib.getTrope(),
-        [CategoryEnum.QUIZ]: () => this.mainLib.getCalvinAndHobbes(),
+        //[CategoryEnum.QUIZ]: () => this.mainLib.getCalvinAndHobbes(),
     };
 
     public async get(category:CategoryEnum, getNew:boolean = false): Promise<CacheKey> {

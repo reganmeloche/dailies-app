@@ -12,6 +12,9 @@ import { ITropeLib } from './tropeLib';
 import Riddle from '../../shared/classes/riddle';
 import Poem from '../../shared/classes/poem';
 import IMainLib from './interfaces/IMainLib';
+import { IFactLib } from './factLib';
+import { IPictureLib } from './pictureLib';
+import Picture from '../../shared/classes/picture';
 
 class MainLib implements IMainLib {
     private comicLib: IComicLib;
@@ -20,6 +23,8 @@ class MainLib implements IMainLib {
     private riddleLib: IRiddleLib;
     private poemLib: IPoemLib;
     private tropeLib: ITropeLib;
+    private factLib: IFactLib;
+    private pictureLib: IPictureLib;
 
 
     constructor(
@@ -29,6 +34,8 @@ class MainLib implements IMainLib {
         riddleLib: IRiddleLib,
         poemLib: IPoemLib,
         tropeLib: ITropeLib,
+        factLib: IFactLib,
+        pictureLib: IPictureLib,
 
     ) {
         this.comicLib = comicLib;
@@ -37,13 +44,11 @@ class MainLib implements IMainLib {
         this.riddleLib = riddleLib;
         this.poemLib = poemLib;
         this.tropeLib = tropeLib;
+        this.factLib = factLib;
+        this.pictureLib = pictureLib;
 
     }
   
-    private sleep(ms: number): Promise<void> {
-        return new Promise(resolve => setTimeout(resolve, ms));
-      }
-
     public async getJoke(): Promise<Joke> {
         return await this.jokeLib.fetchJoke();
     }
@@ -65,10 +70,11 @@ class MainLib implements IMainLib {
     }
 
     public async getFact(): Promise<Fact> {
-        await this.sleep(1000);
+        return await this.factLib.fetchFact();
+    }
 
-        const randomIndex = Math.floor(Math.random() * sampleFacts.length);
-        return sampleFacts[randomIndex]; 
+    public async getPicture(): Promise<Picture> {
+        return await this.pictureLib.fetchPicture();
     }
 
     public async getCalvinAndHobbes(): Promise<CalvinAndHobbes> {

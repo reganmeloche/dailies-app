@@ -1,0 +1,31 @@
+/* Overall joke container */
+.component-container {
+    max-width: 1000px;
+    min-width:400px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Georgia', serif;
+    background-color: #f7f7f7;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* Hover effect for the joke container */
+  .component-container:hover {
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+  }
+  
+  /* Title styling */
+  .component-title {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  

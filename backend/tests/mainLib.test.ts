@@ -11,6 +11,8 @@ import { sampleCalvin } from '../../shared/classes/calvinAndHobbes';
 import { sampleQuotes } from '../../shared/classes/quote';
 import { sampleRiddles } from '../../shared/classes/riddle';
 import { samplePoems } from '../../shared/classes/poem';
+import { IFactLib } from '../src/factLib';
+import { ITropeLib } from '../src/tropeLib';
 
 describe('MainLib Tests', () => {
     let comicLib: jest.Mocked<IComicLib>;
@@ -18,6 +20,8 @@ describe('MainLib Tests', () => {
     let quoteLib: jest.Mocked<IQuoteLib>;
     let riddleLib: jest.Mocked<IRiddleLib>;
     let poemLib: jest.Mocked<IPoemLib>;
+    let tropeLib: jest.Mocked<ITropeLib>;
+    let factLib: jest.Mocked<IFactLib>;
     let sut: MainLib;
 
     beforeEach(() => {
@@ -26,13 +30,17 @@ describe('MainLib Tests', () => {
         quoteLib = mock<IQuoteLib>();
         riddleLib = mock<IRiddleLib>();
         poemLib = mock<IPoemLib>();
+        tropeLib = mock<ITropeLib>();
+        factLib = mock<IFactLib>();
 
         sut = new MainLib(
             comicLib, 
             jokeLib, 
             quoteLib, 
             riddleLib, 
-            poemLib);
+            poemLib,
+            tropeLib,
+            factLib);
     });
 
     it('should get comics', async () => {
@@ -73,5 +81,21 @@ describe('MainLib Tests', () => {
         const result = await sut.getPoem();
         expect(_.isEqual(result, testValue)).toBeTruthy();
         expect(poemLib.fetchPoem).toHaveBeenCalled();
+    });
+
+    it('should get tropes', async () => {
+        // const testValue = samplePoems[0]
+        // poemLib.fetchPoem.mockResolvedValue(testValue);
+        // const result = await sut.getPoem();
+        // expect(_.isEqual(result, testValue)).toBeTruthy();
+        // expect(poemLib.fetchPoem).toHaveBeenCalled();
+    });
+
+    it('should get facts', async () => {
+        // const testValue = samplePoems[0]
+        // poemLib.fetchPoem.mockResolvedValue(testValue);
+        // const result = await sut.getPoem();
+        // expect(_.isEqual(result, testValue)).toBeTruthy();
+        // expect(poemLib.fetchPoem).toHaveBeenCalled();
     });
 });

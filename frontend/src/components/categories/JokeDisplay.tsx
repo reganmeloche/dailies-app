@@ -17,10 +17,10 @@ const JokeDisplay: React.FC = () => {
 
     if (!joke) { return <p>Loading...</p>}
     return (
-        <div className="joke-container">
-            <h3 className="joke-title">Joke of the Day</h3>
+        <div className="component-container">
+            <h3 className="component-title">Joke of the Day</h3>
             <p className="joke-question">{joke.question}</p>
-            <p className="joke-punchline">{joke.punchline}</p>
+            {joke.punchline && <p className="joke-punchline">{joke.punchline}</p>}
         </div>
     );
 };

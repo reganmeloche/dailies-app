@@ -9,7 +9,7 @@ export enum CategoryEnum {
     PICTURE = "picture",
     COMIC = "comic",
     TROPE = "trope",
-    QUIZ = "quiz"
+    //QUIZ = "quiz"
 }
 
 export const initialCategories: Category[] = [
@@ -21,5 +21,5 @@ export const initialCategories: Category[] = [
     { id: 6, name: CategoryEnum.PICTURE },
     { id: 7, name: CategoryEnum.COMIC },
     { id: 8, name: CategoryEnum.TROPE },
-    { id: 9, name: CategoryEnum.QUIZ }
+    //{ id: 9, name: CategoryEnum.QUIZ }
 ];

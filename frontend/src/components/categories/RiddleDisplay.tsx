@@ -16,10 +16,11 @@ const RiddleDisplay: React.FC = () => {
 
     if (!riddle) { return <p>Loading...</p>}
     return (
-        <div>
-            <h3>Riddle</h3>
-            <p>{riddle.question}</p>
-            <p>{riddle.answer}</p>
+        <div className="component-container">
+            <h3 className="component-title">Riddle of the Day</h3>
+            {riddle.title && <p className="riddle-title">{riddle.title}</p>}
+            {riddle.question && <p className="riddle-question">{riddle.question}</p>}
+            {riddle.answer && <p className="riddle-question">{riddle.answer}</p>}
         </div>
     );
 };

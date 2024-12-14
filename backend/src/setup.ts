@@ -12,6 +12,9 @@ import PoemLib from "./poemLib";
 import PoemApi from "./poemApi";
 import TropeLib from "./tropeLib";
 import TropeApi from "./tropeApi";
+import FactLib from "./factLib";
+import UnsplashApi from "./unsplashApi";
+import PictureLib from "./pictureLib";
 
 interface Services {
     cacheLib: CacheLib,
@@ -23,6 +26,7 @@ function setup(config: Config): Services {
     const ninjaApi = new NinjaApi(config.ninjasApiKey);
     const poemApi = new PoemApi();
     const tropeApi = new TropeApi();
+    const unsplashApi = new UnsplashApi(config.unsplashAccessKey);
 
     const lib = new MainLib(
         new ComicLib(),
@@ -31,7 +35,8 @@ function setup(config: Config): Services {
         new RiddleLib(ninjaApi),
         new PoemLib(poemApi),
         new TropeLib(tropeApi),
-
+        new FactLib(ninjaApi),
+        new PictureLib(unsplashApi),
     );
 
     const services: Services = {

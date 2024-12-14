@@ -16,10 +16,10 @@ const QuoteDisplay: React.FC = () => {
 
     if (!quote) { return <p>Loading...</p>}
     return (
-        <div>
-            <h3>Quote</h3>
-            <p>{quote.text}</p>
-            <p> - {quote.author}</p>
+        <div className="component-container">
+            <h3 className="component-title">Quote of the Day</h3>
+            {quote.text && <p className="quote-text">{quote.text}</p>}
+            {quote.author && <p className="quote-author">- {quote.author}</p>}
         </div>
     );
 };
