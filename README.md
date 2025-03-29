@@ -24,22 +24,38 @@ There is a frontend and a backend component. They can be run concurrently:
 - backend: npm run dev (this just runs the typescript without transpiling)
 
 It can also be set up so that backend serves the frontend:
-- First, build the frontend: cd frontent, npm run build -> This creates the build folder in the front-end
-- Next, build the backend: cs backend, npm run build -> This runs tsc, which will output the js into the backend/dist folder
+- First, build the frontend: cd frontend, npm run build -> This creates the build folder in the front-end
+- Next, build the backend: cd backend, npm run build -> This runs tsc, which will output the js into the backend/dist folder
 - Then, move the frontend/build folder into dist
 - Then, run the backend using npm run start (node dist/index.js) 
 
 You can also run tests and linting on the backend using the appropriate npm commands.
 
 ## Deployment
+These instructions are for Azure deployment.
 
-Setting up the applications to run together can be accomplished using the backend npm run build-all command.
+In the front-end index.tsx, ensure StrictMode is enabled.
 
-Then deploy just the backend folder to the cloud provider (e.g. Azure).
+Setting up the applications to run together can be accomplished using the backend `npm run build-all` command, which does the following:
+- creates a dist folder
+- builds the backend using tsc
+- builds the front-end
+- moves the front-end build to the dist folder 
 
-The app should be configured to simply run the `npm run start` command.
+Ensure that node_modules are not included with the deployment (this may need to be removed manually pre-deployment, since the .azureignore doesn't seem to work)
 
-Also make sure to set any environment variables. When NODE_ENV=development, the app expects the frontend and backend to be run separately, and it will use env vars found in the configdev.ts folder. If production, then the backend is set up to serve files from the dist/build folder, and the env vars will come from process.env.
+Ensure the .deployment file includes the following
+```
+[config]
+SCM_DO_BUILD_DURING_DEPLOYMENT=false
+```
+Otherwise, Azure (oryx) may attempt to do a build, which can kill the limited memory.
+
+Deploy *just the backend* folder to the cloud provider (e.g. Azure).
+
+The app should be configured to run `npm install && npm run start` command. 
+
+Make sure to set any environment variables on the prod server. When NODE_ENV=development, the app expects the frontend and backend to be run separately, and it will use env vars found in the configdev.ts folder. If production, then the backend is set up to serve files from the dist/build folder, and the env vars will come from process.env.
 
 
 # TODOS
