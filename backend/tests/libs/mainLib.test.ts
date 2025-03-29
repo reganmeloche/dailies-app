@@ -1,18 +1,18 @@
 import { mock } from 'ts-jest-mocker';
 import _ from 'lodash';
-import MainLib from '../src/mainLib';
-import { IJokeLib } from '../src/libs/jokeLib';
-import { IRiddleLib } from '../src/libs/riddleLib';
-import { IQuoteLib } from '../src/libs/quoteLib';
-import { IPoemLib } from '../src/libs/poemLib';
-import { IComicLib } from '../src/libs/comicLib';
-import { sampleJokes } from '../src/classes/joke';
-import { sampleCalvin } from '../src/classes/calvinAndHobbes';
-import { sampleQuotes } from '../src/classes/quote';
-import { sampleRiddles } from '../src/classes/riddle';
-import { samplePoems } from '../src/classes/poem';
-import { IFactLib } from '../src/libs/factLib';
-import { ITropeLib } from '../src/libs/tropeLib';
+import MainLib from '../../src/mainLib';
+import { IJokeLib } from '../../src/libs/jokeLib';
+import { IRiddleLib } from '../../src/libs/riddleLib';
+import { IQuoteLib } from '../../src/libs/quoteLib';
+import { IPoemLib } from '../../src/libs/poemLib';
+import { IComicLib } from '../../src/libs/comicLib';
+import { sampleJokes } from '../../src/classes/joke';
+import { sampleCalvin } from '../../src/classes/calvinAndHobbes';
+import { sampleQuotes } from '../../src/classes/quote';
+import { sampleRiddles } from '../../src/classes/riddle';
+import { samplePoems } from '../../src/classes/poem';
+import { IFactLib } from '../../src/libs/factLib';
+import { ITropeLib } from '../../src/libs/tropeLib';
 
 describe('MainLib Tests', () => {
     let comicLib: jest.Mocked<IComicLib>;
@@ -92,6 +92,14 @@ describe('MainLib Tests', () => {
     });
 
     it('should get facts', async () => {
+        // const testValue = samplePoems[0]
+        // poemLib.fetchPoem.mockResolvedValue(testValue);
+        // const result = await sut.getPoem();
+        // expect(_.isEqual(result, testValue)).toBeTruthy();
+        // expect(poemLib.fetchPoem).toHaveBeenCalled();
+    });
+
+    it('should get quiz', async () => {
         // const testValue = samplePoems[0]
         // poemLib.fetchPoem.mockResolvedValue(testValue);
         // const result = await sut.getPoem();

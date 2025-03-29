@@ -8,6 +8,7 @@ import RiddleDisplay from './categories/RiddleDisplay';
 import PoemDisplay from './categories/PoemDisplay';
 import PictureDisplay from './categories/PictureDisplay';
 import './Display.css';
+import QuizDisplay from './categories/QuizDisplay';
 
 interface DisplayProps {
     selectedId: number;
@@ -40,6 +41,9 @@ const Display: React.FC<DisplayProps> = ({ selectedId }) => {
           	break;
         case 8:
             content = <TropeDisplay />;
+            break;
+        case 9:
+            content = <QuizDisplay/>;
             break;
         
         default:

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import GoogleAuth from './GoogleAuth';
+import GoogleAuth from './GoogleAuth2';
 
 const Navbar: React.FC = () => {
   const [user, setUser] = useState<any>(null); 
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a className="navbar-brand" href="#home">Dailies App</a>
+      <a className="navbar-brand" href="#home" style={{ paddingLeft: '20px' }}>Dailies App</a>
       <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
@@ -25,8 +25,8 @@ const Navbar: React.FC = () => {
       </div>
 
       <div style={{ marginRight: 8 }}>
-        <GoogleAuth setUser={setUser} />  {/* Pass the setUser function to GoogleAuth */}
-      </div>
+        <GoogleAuth setUser={setUser} /> 
+      </div> 
 
     </nav>
   );

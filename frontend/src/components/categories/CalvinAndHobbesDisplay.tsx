@@ -8,7 +8,6 @@ const CalvinAndHobbesDisplay: React.FC = () => {
         const fetchQuote = async () => {
             const response = await fetch('/api/comic');
             const data = await response.json();
-            console.log(data)
             setComic(data);
         };
     
