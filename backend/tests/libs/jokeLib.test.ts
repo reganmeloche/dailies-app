@@ -1,6 +1,6 @@
 import { mock } from 'ts-jest-mocker';
-import JokeLib from '../src/libs/jokeLib';
-import { INinjaApi } from '../src/helpers/ninjaApi';
+import JokeLib from '../../src/libs/jokeLib';
+import { INinjaApi } from '../../src/helpers/ninjaApi';
 
 describe('JokeLib Tests', () => {
     let api: jest.Mocked<INinjaApi>;

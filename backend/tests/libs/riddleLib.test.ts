@@ -1,6 +1,6 @@
 import { mock } from 'ts-jest-mocker';
-import RiddleLib from '../src/libs/riddleLib';
-import { INinjaApi } from '../src/helpers/ninjaApi';
+import RiddleLib from '../../src/libs/riddleLib';
+import { INinjaApi } from '../../src/helpers/ninjaApi';
 
 describe('RiddleLib Tests', () => {
     let api: jest.Mocked<INinjaApi>;

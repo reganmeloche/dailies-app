@@ -21,7 +21,7 @@ class CacheLib {
         [CategoryEnum.RIDDLE]: () => this.mainLib.getRiddle(),
         [CategoryEnum.PICTURE]: () => this.mainLib.getPicture(),
         [CategoryEnum.TROPE]: () => this.mainLib.getTrope(),
-        //[CategoryEnum.QUIZ]: () => this.mainLib.getCalvinAndHobbes(),
+        [CategoryEnum.QUIZ]: () => this.mainLib.getQuiz(),
     };
 
     public async get(category:CategoryEnum, getNew:boolean = false): Promise<CacheKey> {

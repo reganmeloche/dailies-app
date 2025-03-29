@@ -1,6 +1,6 @@
 import { mock } from 'ts-jest-mocker';
-import QuoteLib from '../src/libs/quoteLib';
-import { INinjaApi } from '../src/helpers/ninjaApi';
+import QuoteLib from '../../src/libs/quoteLib';
+import { INinjaApi } from '../../src/helpers/ninjaApi';
 
 describe('QuoteLib Tests', () => {
     let api: jest.Mocked<INinjaApi>;

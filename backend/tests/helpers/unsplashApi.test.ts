@@ -1,6 +1,7 @@
-import UnsplashApi from '../src/helpers/unsplashApi';
+import UnsplashApi from '../../src/helpers/unsplashApi';
 
-describe('Unsplash API Tests', () => {
+// TODO: Will be setting these up as integration tests, with a separate command
+describe.skip('Unsplash API Tests', () => {
     let sut: UnsplashApi;
 
     beforeEach(() => {

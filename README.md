@@ -1,5 +1,21 @@
 # Dailies App
 
+## Features
+
+This application fetches and presents a set of "dailies", including facts, jokes, tropes, quotes, etc. It uses a variety of integrations to fetch this info. 
+
+
+## Auth Flow
+
+The application uses Google Login. There are integrations on both the front-end and back-end
+- The front-end App component is wrpped wih <GoogleOAuthProvider> from @react-oauth/google
+- The Google clientID is stored in a front-end config (Client ID is public)
+- In a custom GoogleAuth component, the user can click a button to use the Google auth flow via useGoogleLogin (from @react-oauth/google)
+- Once the user logs in with google, it will generate an auth code, which must be exchanged for an access token and user info
+- This exchange is done on the back-end (/api/auth endpoint). Once that exchange is done, the state can be updated and access token stored
+- On page refresh, the component checks for the access token, and then sends it to the back-end for validation and user-info (/api/validate)
+- The backend auth functionality is in the authLib, and makes use of npm packages 'google-auth-library' and 'googleapis'
+
 
 ## Running the app
 
@@ -34,9 +50,8 @@ Also make sure to set any environment variables. When NODE_ENV=development, the 
 - CI/CD
 
 ## Features
-- Auth: Ensure google auth integration is working - allow log in, log out, fetching details
 - User functionality: Ability to save favourites ()
-- LLM integration: Integrate with user's google drive and generate content
+- RAG integration: Integrate with user's google drive and generate content
 - Other Ninja API categories: exercise, nutrition, recipe, historical events, this day in history, city, weather
 - Look into alternate sources for all the categories
 

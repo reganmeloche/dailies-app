@@ -10,6 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+// TODO: Wrap in StrictMode when deploying 
 root.render(
   <App/>
   // <React.StrictMode>

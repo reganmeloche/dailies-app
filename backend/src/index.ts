@@ -3,7 +3,7 @@ import { CategoryEnum } from './helpers/initialCategories';
 import setup from './setup';
 import { Config } from './config';
 import path from 'path';
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
 
 dotenv.config();
 const app = express();
@@ -15,6 +15,7 @@ app.use(express.json());
 // Get config
 let config: Config;
 if (process.env.NODE_ENV === 'development') {
+    console.log('Working in dev mode...');
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     config = require('./configdev').default;
 } else {
@@ -23,10 +24,48 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // Setup
-const { cacheLib, categories } = setup(config);
+const { cacheLib, categories, authLib } = setup(config);
 
 app.get('/api/categories', (req, res) => {
     res.json(categories);
+});
+
+// Exchange authorization code for access token
+app.post('/api/auth', async (req, res) => {
+    const { code } = req.body;
+
+    if (!code) {
+        res.status(400).json({ error: 'Missing auth code' });
+    }
+
+    try {
+        const authResult = await authLib.authSetup(code);
+
+        res.json(authResult);
+
+    } catch (error) {
+        console.error('Error in Google Auth:', error);
+        res.status(500).json({ error: 'Authentication failed' });
+    }
+});
+
+// Validate an access token
+app.post('/api/validate', async (req, res) => {
+    const { token } = req.body;
+    
+    if (!token) {
+        res.status(400).json({ error: 'Missing access token' });
+    }
+
+    try {
+        const validationResult = await authLib.validateAccessToken(token);
+
+        res.json(validationResult);
+
+    } catch (error) {
+        console.error('Error in Google Auth:', error);
+        res.status(500).json({ error: 'Authentication failed' });
+    }
 });
 
 app.get('/api/:category', async (req, res) => {

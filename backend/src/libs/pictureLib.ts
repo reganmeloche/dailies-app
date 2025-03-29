@@ -1,5 +1,4 @@
 import Picture from '../classes/picture';
-import { INinjaApi } from '../helpers/ninjaApi';
 import { IUnsplashApi } from '../helpers/unsplashApi';
 
 export interface IPictureLib {
@@ -15,7 +14,6 @@ class PictureLib implements IPictureLib {
 
     public async fetchPicture(): Promise<Picture> {
         const apiResponse = await this.api.getRandomPicture();
-        console.log("PIC", apiResponse);
         return apiResponse;
     }    
 }

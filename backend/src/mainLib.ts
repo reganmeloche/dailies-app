@@ -1,6 +1,6 @@
 import Joke from './classes/joke';
 import Quote from './classes/quote';
-import Fact, {sampleFacts} from './classes/fact';
+import Fact from './classes/fact';
 import CalvinAndHobbes, {sampleCalvin} from './classes/calvinAndHobbes';
 import Trope from './classes/trope';
 import { IComicLib } from './libs/comicLib';
@@ -15,6 +15,8 @@ import IMainLib from './interfaces/IMainLib';
 import { IFactLib } from './libs/factLib';
 import { IPictureLib } from './libs/pictureLib';
 import Picture from './classes/picture';
+import Quiz from './classes/quiz';
+import { IQuizLib } from './libs/quizLib';
 
 class MainLib implements IMainLib {
     private comicLib: IComicLib;
@@ -25,6 +27,7 @@ class MainLib implements IMainLib {
     private tropeLib: ITropeLib;
     private factLib: IFactLib;
     private pictureLib: IPictureLib;
+    private quizLib: IQuizLib;
 
 
     constructor(
@@ -36,6 +39,7 @@ class MainLib implements IMainLib {
         tropeLib: ITropeLib,
         factLib: IFactLib,
         pictureLib: IPictureLib,
+        quizLib: IQuizLib
 
     ) {
         this.comicLib = comicLib;
@@ -46,6 +50,7 @@ class MainLib implements IMainLib {
         this.tropeLib = tropeLib;
         this.factLib = factLib;
         this.pictureLib = pictureLib;
+        this.quizLib = quizLib;
 
     }
   
@@ -87,6 +92,10 @@ class MainLib implements IMainLib {
             result = sampleCalvin[randomIndex]; 
         }
         return result;
+    }
+
+    public async getQuiz(): Promise<Quiz> {
+        return await this.quizLib.fetchQuiz();
     }
   }
   

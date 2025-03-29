@@ -19,9 +19,9 @@ class NinjaApi implements INinjaApi {
               'X-Api-Key': this.apiKey,
             }
         });
-        // May add error handling...
+        // TODO: add error handling...
         return response.data;
-  }
+    }
 
 }
 

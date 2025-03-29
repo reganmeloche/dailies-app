@@ -1,8 +1,8 @@
 import { mock } from 'ts-jest-mocker';
-import CacheLib from '../src/cacheLib';
-import IMainLib from '../src/interfaces/IMainLib';
-import Joke from '../src/classes/joke';
-import { CategoryEnum } from '../src/helpers/initialCategories';
+import CacheLib from '../../src/cacheLib';
+import IMainLib from '../../src/interfaces/IMainLib';
+import Joke from '../../src/classes/joke';
+import { CategoryEnum } from '../../src/helpers/initialCategories';
 
 describe('CacheLib Tests', () => {
     let mainLib: jest.Mocked<IMainLib>;

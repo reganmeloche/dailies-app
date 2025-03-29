@@ -12,13 +12,12 @@ class Trope {
     }
 }
 
-export const sampleRiddles: Trope[] = [
-    { 
-        title: "Muzzle Flashlight", 
-        text: ["Sometimes, games feature incredibly dark areas for you to traverse. Sometimes, the developers haven't given you an adequate flashlight, or perhaps you had one, but the batteries died a long time ago. How do you find your way now? Start blindly firing your weapons, of course! Your muzzle flash, glowing magic, or energy weapons are all you need to light the way, and can do so fairly well. Never mind that it could give away your position, since your enemies can probably all see in the dark anyway."],
-        pictureUrl: "https://static.tvtropes.org/pmwiki/pub/images/MightMakesLight.jpg",
-        link: 'https://tvtropes.org/pmwiki/pmwiki.php/Main/MuzzleFlashlight'
-    }
-];
+export const sampleTrope: Trope = 
+{ 
+    title: "Muzzle Flashlight", 
+    text: ["Sometimes, games feature incredibly dark areas for you to traverse. Sometimes, the developers haven't given you an adequate flashlight, or perhaps you had one, but the batteries died a long time ago. How do you find your way now? Start blindly firing your weapons, of course! Your muzzle flash, glowing magic, or energy weapons are all you need to light the way, and can do so fairly well. Never mind that it could give away your position, since your enemies can probably all see in the dark anyway."],
+    pictureUrl: "https://static.tvtropes.org/pmwiki/pub/images/MightMakesLight.jpg",
+    link: 'https://tvtropes.org/pmwiki/pmwiki.php/Main/MuzzleFlashlight'
+};
 
 export default Trope;
