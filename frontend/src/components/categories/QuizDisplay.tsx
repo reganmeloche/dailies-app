@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Quiz from '../../../../backend/src/classes/quiz';
+import Quiz from '@shared/quiz';
 
 const QuizDisplay: React.FC = () => {
     const [quiz, setQuiz] = useState<Quiz | null>(null);

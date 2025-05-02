@@ -29,6 +29,10 @@ It can also be set up so that backend serves the frontend:
 - Then, move the frontend/build folder into dist
 - Then, run the backend using npm run start (node dist/index.js) 
 
+You can also use docker. The Dockerfile performs all the steps described above:
+- In the main project directory, run: `docker build -t dailies-app .`
+- Then run the container: `docker run --env-file .env -p 3001:3001 -it dailies-app` 
+
 You can also run tests and linting on the backend using the appropriate npm commands.
 
 ## Deployment
@@ -36,6 +40,7 @@ These instructions are for Azure deployment.
 
 In the front-end index.tsx, ensure StrictMode is enabled.
 
+### Manually
 Setting up the applications to run together can be accomplished using the backend `npm run build-all` command, which does the following:
 - creates a dist folder
 - builds the backend using tsc
@@ -56,6 +61,10 @@ Deploy *just the backend* folder to the cloud provider (e.g. Azure).
 The app should be configured to run `npm install && npm run start` command. 
 
 Make sure to set any environment variables on the prod server. When NODE_ENV=development, the app expects the frontend and backend to be run separately, and it will use env vars found in the configdev.ts folder. If production, then the backend is set up to serve files from the dist/build folder, and the env vars will come from process.env.
+
+### Containerized
+
+...
 
 
 # TODOS

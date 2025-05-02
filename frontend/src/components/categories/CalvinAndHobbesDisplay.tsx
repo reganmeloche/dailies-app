@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import CalvinAndHobbes from '../../../../backend/src/classes/calvinAndHobbes';
+import CalvinAndHobbes from '@shared/calvinAndHobbes';
 
 const CalvinAndHobbesDisplay: React.FC = () => {
     const [comic, setComic] = useState<CalvinAndHobbes | null>(null);

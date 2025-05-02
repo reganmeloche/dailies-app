@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Picture from '../../../../backend/src/classes/picture';
+import Picture from '@shared/picture';
 
 const PictureDisplay: React.FC = () => {
     const [picture, setPicture] = useState<Picture | null>(null);

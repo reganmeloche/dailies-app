@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Joke from '../../../../backend/src/classes/joke';
+import Joke from '@shared/joke';
 import './JokeDisplay.css';
 
 const JokeDisplay: React.FC = () => {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Menu from './Menu';
 import Display from './Display';
-import { Category } from '../../../backend/src/classes/category';
+import { Category } from '@shared/category';
 
 const Content: React.FC = () => {
     const [selectedId, setSelectedId] = useState<number>(1);
