@@ -6,5 +6,5 @@
 Dockerfile
 
 .vscode
-
+*.log
 .env

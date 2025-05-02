@@ -31,7 +31,9 @@ It can also be set up so that backend serves the frontend:
 
 You can also use docker. The Dockerfile performs all the steps described above:
 - In the main project directory, run: `docker build -t dailies-app .`
-- Then run the container: `docker run --env-file .env -p 3001:3001 -it dailies-app` 
+- Then run the container: `docker run --env-file ./backend/.env -p 3001:3001 -it dailies-app` 
+
+Or you can pull the image from DockerHub before running: `docker pull reganmeloche/dailies-app:latest`
 
 You can also run tests and linting on the backend using the appropriate npm commands.
 
@@ -40,7 +42,7 @@ These instructions are for Azure deployment.
 
 In the front-end index.tsx, ensure StrictMode is enabled.
 
-### Manually
+### Regular App Service
 Setting up the applications to run together can be accomplished using the backend `npm run build-all` command, which does the following:
 - creates a dist folder
 - builds the backend using tsc
@@ -62,16 +64,21 @@ The app should be configured to run `npm install && npm run start` command.
 
 Make sure to set any environment variables on the prod server. When NODE_ENV=development, the app expects the frontend and backend to be run separately, and it will use env vars found in the configdev.ts folder. If production, then the backend is set up to serve files from the dist/build folder, and the env vars will come from process.env.
 
-### Containerized
+### Containerized App Service
 
-...
+If the image is in a container registry (DockerHub), then it can be deployed with an Azure App configured to pull from the registry
+- Run a build: `docker build -t dailies-app .`
+- Add the tag: `docker tag dailies-app reganmeloche/dailies-app:latest`
+- Push the latest image to DockerHub: `docker push reganmeloche/dailies-app:latest`
+- Restart the app in Azure
 
 
 # TODOS
 
 ## Dev ops
-- More tests and linting
-- Containerization (docker file, etc) - deploy with docker
+- Add in a DB
+- Logging, monitoring, telemetry
+- General cleanup: Tests, linting, clean up packages
 - CI/CD
 
 ## Features
