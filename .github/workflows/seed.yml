@@ -1,0 +1,17 @@
+name: Daily HTTP Call
+
+on:
+  schedule:
+    - cron: '0 12 * * *'  # Every day at 12:00 UTC
+  workflow_dispatch:      # Allow manual trigger too
+
+jobs:
+  call-api:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Make HTTP request
+        run: |
+          curl -X POST ${{ secrets.URL }}/api/seed \
+            -H "Content-Type: application/json" \
+            -H "x-seed-secret: ${{ secrets.SEED_SECRET }}"
