@@ -24,7 +24,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // Setup
-const { cacheLib, categories, authLib } = setup(config);
+const { fetchLib, categories, authLib, seeder } = setup(config);
 
 app.get('/api/categories', (req, res) => {
     res.json(categories);
@@ -40,9 +40,7 @@ app.post('/api/auth', async (req, res) => {
 
     try {
         const authResult = await authLib.authSetup(code);
-
         res.json(authResult);
-
     } catch (error) {
         console.error('Error in Google Auth:', error);
         res.status(500).json({ error: 'Authentication failed' });
@@ -59,20 +57,43 @@ app.post('/api/validate', async (req, res) => {
 
     try {
         const validationResult = await authLib.validateAccessToken(token);
-
         res.json(validationResult);
-
     } catch (error) {
         console.error('Error in Google Auth:', error);
         res.status(500).json({ error: 'Authentication failed' });
     }
 });
 
-app.get('/api/:category', async (req, res) => {
-    const category = req.params.category as CategoryEnum;
-    const result = await cacheLib.get(category, req.query.clear == 'true');
-    res.json(result);
+// Seed the data
+app.post('/api/seed', async (req, res) => {
+    const secret = req.header('x-seed-secret');
+    if (secret !== config.seedPassword) {
+        res.status(403).json({ error: 'Invalid seed secret. '});
+        return;
+    }
+
+    try {
+        const forceSeed = req.query.force === 'true';
+        seeder.trySeed(forceSeed);
+        res.json('Seeding complete');
+    } catch (error) {
+        console.error('Seeding error: ', error);
+        res.status(500).json({ error: 'Seeding failed.' });
+    }
 });
+
+// Get the content for a category
+app.get('/api/:category', async (req, res) => {
+    try {
+        const category = req.params.category as CategoryEnum;
+        const result = await fetchLib.get(category);
+        res.json(result);
+    } catch (error) {
+        console.error('Fetching error: ', error);
+        res.status(500).json({ error: `Fetching ${req.params.category} failed.` });
+    }
+});
+
 
 // Front end setup
 if (process.env.NODE_ENV !== 'development') {

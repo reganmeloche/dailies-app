@@ -1,4 +1,6 @@
 **/node_modules
+**/dist
+**/tests
 
 .git
 .gitignore
@@ -8,3 +10,6 @@ Dockerfile
 .vscode
 *.log
 .env
+
+todo.txt
+configdev.ts
