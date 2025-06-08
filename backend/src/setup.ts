@@ -1,4 +1,3 @@
-import CacheLib from "./cacheLib";
 import ComicLib from "./libs/comicLib";
 import { initialCategories } from "./helpers/initialCategories";
 import JokeLib from "./libs/jokeLib";
@@ -17,15 +16,18 @@ import UnsplashApi from "./helpers/unsplashApi";
 import PictureLib from "./libs/pictureLib";
 import QuizLib from "./libs/quizLib";
 import AuthLib from "./authLib";
+import Seeder from "./seeder";
 
 import { OAuth2Client } from 'google-auth-library';
 import OpenAiApi, { OpenAiOptions } from "./helpers/llmApi";
+import { PrismaClient } from '@prisma/client';
+import FetchLib from "./fetchLib";
 
 interface Services {
-    cacheLib: CacheLib,
+    fetchLib: FetchLib,
     categories: Category[],
-    authLib: AuthLib
-
+    authLib: AuthLib,
+    seeder: Seeder
 };
 
 function setup(config: Config): Services {
@@ -61,7 +63,8 @@ function setup(config: Config): Services {
         'political theory',
         'film theory',
         'computer science',
-        'software development'
+        'software development',
+        'software cybersecurity',
     ];
 
     const lib = new MainLib(
@@ -74,14 +77,16 @@ function setup(config: Config): Services {
         new FactLib(ninjaApi),
         new PictureLib(unsplashApi),
         new QuizLib(llmApi, quizTopics),
-
     );
 
+    const dbClient = new PrismaClient();
+    const seeder = new Seeder(lib, initialCategories, dbClient);
+
     const services: Services = {
-        cacheLib: new CacheLib(lib),
+        fetchLib: new FetchLib(dbClient),
         categories: initialCategories,
         authLib: authLib,
-
+        seeder: seeder,
     };
     
     return services;

@@ -5,6 +5,7 @@ export interface Config {
     googleClientSecret: string,
     googleRedirectURI: string,
     openAIApiKey: string,
+    seedPassword: string,
 }
   
 const config: Config = {
@@ -14,6 +15,7 @@ const config: Config = {
     googleClientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
     googleRedirectURI: process.env.GOOGLE_REDIRECT_URI || '',
     openAIApiKey: process.env.OPENAI_API_KEY || '',
+    seedPassword: process.env.SEED_PASSWORD || '',
 };
   
 export default config;

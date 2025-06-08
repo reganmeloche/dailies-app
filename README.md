@@ -76,13 +76,12 @@ If the image is in a container registry (DockerHub), then it can be deployed wit
 # TODOS
 
 ## Dev ops
-- Add in a DB
 - Logging, monitoring, telemetry
 - General cleanup: Tests, linting, clean up packages
 - CI/CD
 
 ## Features
-- User functionality: Ability to save favourites ()
+- User functionality: Ability to save favourites
 - RAG integration: Integrate with user's google drive and generate content
 - Other Ninja API categories: exercise, nutrition, recipe, historical events, this day in history, city, weather
 - Look into alternate sources for all the categories
