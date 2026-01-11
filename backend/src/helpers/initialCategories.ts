@@ -10,8 +10,10 @@ export enum CategoryEnum {
     COMIC = "comic",
     TROPE = "trope",
     QUIZ = "quiz",
+    TIP = "tip",
 }
 
+// Will separate this out into dailies and weeklies
 export const initialCategories: Category[] = [
     { id: 1, name: CategoryEnum.JOKE },
     { id: 2, name: CategoryEnum.FACT },
@@ -19,7 +21,8 @@ export const initialCategories: Category[] = [
     { id: 4, name: CategoryEnum.QUOTE },
     { id: 5, name: CategoryEnum.POEM },
     { id: 6, name: CategoryEnum.PICTURE },
-    { id: 7, name: CategoryEnum.COMIC },
-    { id: 8, name: CategoryEnum.TROPE },
+    //{ id: 7, name: CategoryEnum.COMIC },
+    //{ id: 8, name: CategoryEnum.TROPE },
     { id: 9, name: CategoryEnum.QUIZ },
+    { id: 10, name: CategoryEnum.TIP },
 ];

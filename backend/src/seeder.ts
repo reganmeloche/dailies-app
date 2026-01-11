@@ -28,7 +28,23 @@ class Seeder {
         [CategoryEnum.PICTURE]: () => this.mainLib.getPicture(),
         [CategoryEnum.TROPE]: () => this.mainLib.getTrope(),
         [CategoryEnum.QUIZ]: () => this.mainLib.getQuiz(),
+        [CategoryEnum.TIP]: () => this.mainLib.getTip(),
     };
+
+    public async seedCategory(category: CategoryEnum) {
+        const dayKey = Utilities.getFormattedDay();
+
+        const result = await this.fetchFunctions[category]();
+
+        const newEntry = await this.dbClient.entry.create({
+            data: {
+                datetime: new Date(),
+                day: dayKey,
+                category: category,
+                content: JSON.stringify(result)
+            }
+        });
+    }
 
     public async trySeed(forceSeed = false) {
         const dayKey = Utilities.getFormattedDay();

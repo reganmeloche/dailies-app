@@ -22,6 +22,7 @@ import { OAuth2Client } from 'google-auth-library';
 import OpenAiApi, { OpenAiOptions } from "./helpers/llmApi";
 import { PrismaClient } from '@prisma/client';
 import FetchLib from "./fetchLib";
+import TipLib from "./libs/tipLib";
 
 interface Services {
     fetchLib: FetchLib,
@@ -53,18 +54,29 @@ function setup(config: Config): Services {
     const quizTopics = [
         'databases', 
         'health and nutrition', 
-        'dog training', 
+        'first aid',
+        'dog training',
+        
         'film structure',
+        'film history',
+        'film theory',
+
         'canadian history',
         'geography',
         'ancient history',
         'economics',
         'canadian politics',
         'political theory',
-        'film theory',
+
         'computer science',
         'software development',
         'software cybersecurity',
+    ];
+
+    const tipTopics = [
+        ['health', 'wellness', 'fitness', 'nutrition', 'first aid', 'dog health'],
+        ['technology', 'programming', 'c++', 'software architecture', 'cybersecurity'],
+        ['productivity', 'time management', 'organization', 'random', 'life hacks'],
     ];
 
     const lib = new MainLib(
@@ -77,6 +89,7 @@ function setup(config: Config): Services {
         new FactLib(ninjaApi),
         new PictureLib(unsplashApi),
         new QuizLib(llmApi, quizTopics),
+        new TipLib(llmApi, tipTopics)
     );
 
     const dbClient = new PrismaClient();
@@ -91,6 +104,5 @@ function setup(config: Config): Services {
     
     return services;
 };
-
 
 export default setup;

@@ -1,5 +1,3 @@
-import axios from 'axios';
-import * as cheerio from 'cheerio';
 import CalvinAndHobbes from '../classes/calvinAndHobbes';
 
 export interface IComicLib {
@@ -18,18 +16,8 @@ class ComicLib implements IComicLib {
             // Build the url with current date
             const dateString = this.getDateString();
             const url = this.baseUrl + '/' + dateString;
-            
-            // Make a GET request to the provided URL using Axios
-            const response = await axios.get(url);
 
-            // Load the HTML into cheerio
-            const $ = cheerio.load(response.data);
-
-            // Find the element with the specified class
-            const target = $('picture.item-comic-image img.img-fluid');
-            const targetValue = target.attr('src') || "";
-
-            return new CalvinAndHobbes(targetValue);
+            return new CalvinAndHobbes("");
         } catch (error) {
             console.error('Error fetching or parsing:', error);
             return null;

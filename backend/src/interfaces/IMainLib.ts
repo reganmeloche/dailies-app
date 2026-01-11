@@ -7,8 +7,9 @@ import Poem from '../classes/poem';
 import Trope from '../classes/trope';
 import Picture from '../classes/picture';
 import Quiz from '../classes/quiz';
+import Tip from '../classes/tip';
 
-export type CacheKey = Joke | Riddle | Poem | Quote | Fact | CalvinAndHobbes | Trope | Picture | Quiz;
+export type CacheKey = Joke | Riddle | Poem | Quote | Fact | CalvinAndHobbes | Trope | Picture | Quiz | Tip;
 
 export default interface IMainLib {
     getJoke(): Promise<Joke>;
@@ -20,4 +21,5 @@ export default interface IMainLib {
     getTrope(): Promise<Trope>,
     getPicture(): Promise<Picture>,
     getQuiz(): Promise<Quiz>,
+    getTip(): Promise<Tip>,
 } 
