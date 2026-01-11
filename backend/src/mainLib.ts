@@ -17,6 +17,8 @@ import { IPictureLib } from './libs/pictureLib';
 import Picture from './classes/picture';
 import Quiz from './classes/quiz';
 import { IQuizLib } from './libs/quizLib';
+import Tip from './classes/tip';
+import { ITipLib } from './libs/tipLib';
 
 class MainLib implements IMainLib {
     private comicLib: IComicLib;
@@ -28,6 +30,7 @@ class MainLib implements IMainLib {
     private factLib: IFactLib;
     private pictureLib: IPictureLib;
     private quizLib: IQuizLib;
+    private tipLib: ITipLib;
 
 
     constructor(
@@ -39,7 +42,8 @@ class MainLib implements IMainLib {
         tropeLib: ITropeLib,
         factLib: IFactLib,
         pictureLib: IPictureLib,
-        quizLib: IQuizLib
+        quizLib: IQuizLib,
+        tipLib: ITipLib,
 
     ) {
         this.comicLib = comicLib;
@@ -51,6 +55,7 @@ class MainLib implements IMainLib {
         this.factLib = factLib;
         this.pictureLib = pictureLib;
         this.quizLib = quizLib;
+        this.tipLib = tipLib;
 
     }
   
@@ -96,6 +101,10 @@ class MainLib implements IMainLib {
 
     public async getQuiz(): Promise<Quiz> {
         return await this.quizLib.fetchQuiz();
+    }
+
+    public async getTip(): Promise<Tip> {
+        return await this.tipLib.fetchTips();
     }
   }
   

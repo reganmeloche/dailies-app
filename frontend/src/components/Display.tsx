@@ -9,6 +9,7 @@ import PoemDisplay from './categories/PoemDisplay';
 import PictureDisplay from './categories/PictureDisplay';
 import './Display.css';
 import QuizDisplay from './categories/QuizDisplay';
+import TipDisplay from './categories/TipDisplay';
 
 interface DisplayProps {
     selectedId: number;
@@ -44,6 +45,9 @@ const Display: React.FC<DisplayProps> = ({ selectedId }) => {
             break;
         case 9:
             content = <QuizDisplay/>;
+            break;
+        case 10:
+            content = <TipDisplay/>;
             break;
         
         default:

@@ -10,5 +10,6 @@ describe('ComicLib Tests', () => {
     it('should get comic', async () => {
         const result = await sut.fetchComic();
         expect(result?.urlString).toBeDefined();
+        expect(result?.urlString.length).toBeGreaterThan(0);
     });
 });

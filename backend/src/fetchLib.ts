@@ -14,7 +14,8 @@ class FetchLib {
         const dayKey: string = Utilities.getFormattedDay();
 
         const record = await this.dbClient.entry.findFirst({
-            where: {  day: dayKey, category: categoryKey },
+            where: { day: dayKey, category: categoryKey },
+            orderBy: { datetime: 'desc' },
         });
 
         if (record) {
