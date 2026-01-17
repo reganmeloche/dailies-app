@@ -5,11 +5,23 @@ on:
     - cron: '0 12 * * *'   # Daily at 12:00 UTC
     - cron: '0 12 * * 0'   # Weekly on Sunday at 12:00 UTC
     - cron: '0 12 * * 1'   # Weekly on Monday at 12:00 UTC
-  workflow_dispatch:       # Allow manual trigger too
+  workflow_dispatch: # manual trigger setup
+    inputs:
+      run:
+        description: 'Which job to run'
+        required: true
+        default: daily
+        type: choice
+        options:
+          - daily
+          - weekly
+          - clear
 
 jobs:
   daily-call:
-    if: github.event_name == 'schedule' && github.event.schedule == '0 12 * * *'
+    if: |
+      (github.event_name == 'schedule' && github.event.schedule == '0 12 * * *') ||
+      (github.event_name == 'workflow_dispatch' && (inputs.run == 'daily'))
     runs-on: ubuntu-latest
 
     steps:
@@ -20,7 +32,9 @@ jobs:
             -H "x-seed-secret: ${{ secrets.SEED_SECRET }}"
   
   weekly-call:
-    if: github.event_name == 'schedule' && github.event.schedule == '0 12 * * 0'
+    if: | 
+      (github.event_name == 'schedule' && github.event.schedule == '0 12 * * 0') || 
+      (github.event_name == 'workflow_dispatch' && (inputs.run == 'weekly'))
     runs-on: ubuntu-latest
 
     steps:
@@ -31,7 +45,9 @@ jobs:
             -H "x-seed-secret: ${{ secrets.SEED_SECRET }}"
   
   clear-call:
-    if: github.event_name == 'schedule' && github.event.schedule == '0 12 * * 1'
+    if: |
+      (github.event_name == 'schedule' && github.event.schedule == '0 12 * * 1') ||
+      (github.event_name == 'workflow_dispatch' && (inputs.run == 'clear'))
     runs-on: ubuntu-latest
 
     steps:
