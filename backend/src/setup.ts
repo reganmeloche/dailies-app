@@ -23,6 +23,9 @@ import OpenAiApi, { OpenAiOptions } from "./helpers/llmApi";
 import { PrismaClient } from '@prisma/client';
 import FetchLib from "./fetchLib";
 import TipLib from "./libs/tipLib";
+import RecipeLib from "./libs/recipeLib";
+import ArtLib from "./libs/artLib";
+import MusicLib from "./libs/musicLib";
 
 interface Services {
     fetchLib: FetchLib,
@@ -79,6 +82,10 @@ function setup(config: Config): Services {
         ['productivity', 'time management', 'organization', 'random', 'life hacks'],
     ];
 
+    const cuisinePrompts: string[] = [];
+
+    const genrePrompts: string[] = [];
+
     const lib = new MainLib(
         new ComicLib(),
         new JokeLib(ninjaApi),
@@ -89,7 +96,10 @@ function setup(config: Config): Services {
         new FactLib(ninjaApi),
         new PictureLib(unsplashApi),
         new QuizLib(llmApi, quizTopics),
-        new TipLib(llmApi, tipTopics)
+        new TipLib(llmApi, tipTopics),
+        new RecipeLib(llmApi, cuisinePrompts),
+        new ArtLib(),
+        new MusicLib(llmApi, genrePrompts)
     );
 
     const dbClient = new PrismaClient();

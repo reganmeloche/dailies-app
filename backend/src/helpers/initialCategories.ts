@@ -11,18 +11,28 @@ export enum CategoryEnum {
     TROPE = "trope",
     QUIZ = "quiz",
     TIP = "tip",
+    ART = "art",
+    MUSIC = "music",    
+    RECIPE = "recipe",
+    // ...
 }
 
-// Will separate this out into dailies and weeklies
+// Likely don't need the ids...
 export const initialCategories: Category[] = [
-    { id: 1, name: CategoryEnum.JOKE },
-    { id: 2, name: CategoryEnum.FACT },
-    { id: 3, name: CategoryEnum.RIDDLE },
-    { id: 4, name: CategoryEnum.QUOTE },
-    { id: 5, name: CategoryEnum.POEM },
-    { id: 6, name: CategoryEnum.PICTURE },
-    //{ id: 7, name: CategoryEnum.COMIC },
-    //{ id: 8, name: CategoryEnum.TROPE },
-    { id: 9, name: CategoryEnum.QUIZ },
-    { id: 10, name: CategoryEnum.TIP },
+    // Daily
+    { id: 1, name: CategoryEnum.JOKE, frequency: 'daily' },
+    { id: 2, name: CategoryEnum.FACT, frequency: 'daily' },
+    { id: 3, name: CategoryEnum.RIDDLE, frequency: 'daily' },
+    { id: 4, name: CategoryEnum.QUOTE, frequency: 'daily' },
+    { id: 5, name: CategoryEnum.PICTURE, frequency: 'daily' },
+    { id: 6, name: CategoryEnum.QUIZ, frequency: 'daily' },
+    { id: 7, name: CategoryEnum.TIP, frequency: 'daily' },
+    { id: 8, name: CategoryEnum.COMIC, frequency: 'daily' },
+
+    // Weekly
+    { id: 12, name: CategoryEnum.POEM, frequency: 'weekly' },
+    { id: 13, name: CategoryEnum.ART, frequency: 'weekly' },
+    { id: 14, name: CategoryEnum.TROPE, frequency: 'weekly' },
+    { id: 15, name: CategoryEnum.MUSIC, frequency: 'weekly' },
+    { id: 16, name: CategoryEnum.RECIPE, frequency: 'weekly' },
 ];

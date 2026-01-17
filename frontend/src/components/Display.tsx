@@ -1,4 +1,5 @@
 import React from 'react';
+import './Display.css';
 import JokeDisplay from './categories/JokeDisplay';
 import FactDisplay from './categories/FactDisplay';
 import QuoteDisplay from './categories/QuoteDisplay';
@@ -7,57 +8,43 @@ import TropeDisplay from './categories/TropeDisplay';
 import RiddleDisplay from './categories/RiddleDisplay';
 import PoemDisplay from './categories/PoemDisplay';
 import PictureDisplay from './categories/PictureDisplay';
-import './Display.css';
 import QuizDisplay from './categories/QuizDisplay';
 import TipDisplay from './categories/TipDisplay';
+import RecipeDisplay from './categories/RecipeDisplay';
+import MusicDisplay from './categories/MusicDisplay';
+import ArtDisplay from './categories/ArtDisplay';
+//... import other category components as needed
 
 interface DisplayProps {
-    selectedId: number;
+    selected: string;
 }
 
-const Display: React.FC<DisplayProps> = ({ selectedId }) => {
-    let content;
+const displayMap: Record<string, JSX.Element> = {
+    joke: <JokeDisplay />,
+    fact: <FactDisplay />,
+    riddle: <RiddleDisplay />,
+    quote: <QuoteDisplay />,
+    poem: <PoemDisplay />,
+    picture: <PictureDisplay />,
+    comic: <CalvinAndHobbesDisplay />,
+    trope: <TropeDisplay />,
+    quiz: <QuizDisplay/>,
+    tip: <TipDisplay/>,
+    recipe: <RecipeDisplay/>,
+    music: <MusicDisplay/>,
+    art: <ArtDisplay/>,
+    //...
+};
 
-    switch (selectedId) {
-        case 1:
-          	content = <JokeDisplay />;
-          	break;
-        case 2:
-          	content = <FactDisplay />;
-          	break;
-        case 3:
-            content = <RiddleDisplay />;
-            break;
-        case 4:
-          	content = <QuoteDisplay />;
-          	break; 
-		case 5:
-			content = <PoemDisplay />;
-			break;  
-        case 6:
-            content = <PictureDisplay />;
-            break;
-        case 7:
-          	content = <CalvinAndHobbesDisplay />;
-          	break;
-        case 8:
-            content = <TropeDisplay />;
-            break;
-        case 9:
-            content = <QuizDisplay/>;
-            break;
-        case 10:
-            content = <TipDisplay/>;
-            break;
-        
-        default:
-          	content = <div>Select a valid ID</div>;
-      }
-    
+const Display: React.FC<DisplayProps> = ({ selected }) => {
+    let content = displayMap[selected] || null;
+
+    if (!content) {
+        content = <div>Select a valid category</div>;
+    }
+
     return (
-        <div>
-            {content}
-        </div>
+        <div>{content}</div>
     );
 };
 

@@ -4,30 +4,36 @@ import Display from './Display';
 import { Category } from '@shared/category';
 
 const Content: React.FC = () => {
-    const [selectedId, setSelectedId] = useState<number>(1);
-    const [categories, setCategories] = useState<Category[]>([]);
+    const [selected, setSelected] = useState<string>("joke");
+    const [dailies, setDailies] = useState<Category[]>([]);
+    const [weeklies, setWeeklies] = useState<Category[]>([]);
 
     useEffect(() => {
         const fetchItems = async () => {
             const response = await fetch('/api/categories');
             const data = await response.json();
-            setCategories(data);
+
+            const dailiesCat = data.filter((cat: Category) => cat.frequency === 'daily');
+            const weekliesCat = data.filter((cat: Category) => cat.frequency === 'weekly');
+            
+            setDailies(dailiesCat);
+            setWeeklies(weekliesCat);
         };
     
         fetchItems();  
     }, []);
 
-    const handleCategoryClick = (id: number) => {
-        setSelectedId(id);
+    const handleCategoryClick = (category: string) => {
+        setSelected(category);
     };
 
     return (
         <div className="row" style={{ margin: 0, height:'100%' }}>
             <div className="col-3" style={{ padding: 20 }}>
-                <Menu items={categories} selectedId={selectedId} onItemClick={handleCategoryClick} />
+                <Menu dailyItems={dailies} weeklyItems={weeklies} selected={selected} onItemClick={handleCategoryClick} />
             </div>
             <div className="col-9" style={{ padding: 20, borderLeft: '2px solid #dee2e6' }}>
-                <Display selectedId={selectedId} />
+                <Display selected={selected} />
             </div>
         </div>
     );

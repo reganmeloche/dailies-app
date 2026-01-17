@@ -7,7 +7,7 @@ import { IQuoteLib } from '../../src/libs/quoteLib';
 import { IPoemLib } from '../../src/libs/poemLib';
 import { IComicLib } from '../../src/libs/comicLib';
 import { sampleJokes } from '../../src/classes/joke';
-import { sampleCalvin } from '../../src/classes/calvinAndHobbes';
+import { sampleComic } from '../../src/classes/calvinAndHobbes';
 import { sampleQuotes } from '../../src/classes/quote';
 import { sampleRiddles } from '../../src/classes/riddle';
 import { samplePoems } from '../../src/classes/poem';
@@ -44,7 +44,7 @@ describe('MainLib Tests', () => {
     });
 
     it('should get comics', async () => {
-        const testValue = sampleCalvin[0]
+        const testValue = sampleComic;
         comicLib.fetchComic.mockResolvedValue(testValue);
         const result = await sut.getCalvinAndHobbes();
         expect(_.isEqual(result, testValue)).toBeTruthy();

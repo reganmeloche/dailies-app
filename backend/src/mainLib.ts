@@ -1,24 +1,32 @@
 import Joke from './classes/joke';
 import Quote from './classes/quote';
 import Fact from './classes/fact';
-import CalvinAndHobbes, {sampleCalvin} from './classes/calvinAndHobbes';
+import CalvinAndHobbes from './classes/calvinAndHobbes';
 import Trope from './classes/trope';
+import Riddle from './classes/riddle';
+import Poem from './classes/poem';
+import Picture from './classes/picture';
+import Quiz from './classes/quiz';
+import Tip from './classes/tip';
+import Recipe from './classes/recipe';
+import Art from './classes/art';
+import Music from './classes/music';
+
 import { IComicLib } from './libs/comicLib';
 import { IJokeLib } from './libs/jokeLib';
 import { IQuoteLib } from './libs/quoteLib';
 import { IRiddleLib } from './libs/riddleLib';
 import { IPoemLib } from './libs/poemLib';
 import { ITropeLib } from './libs/tropeLib';
-import Riddle from './classes/riddle';
-import Poem from './classes/poem';
-import IMainLib from './interfaces/IMainLib';
 import { IFactLib } from './libs/factLib';
 import { IPictureLib } from './libs/pictureLib';
-import Picture from './classes/picture';
-import Quiz from './classes/quiz';
 import { IQuizLib } from './libs/quizLib';
-import Tip from './classes/tip';
 import { ITipLib } from './libs/tipLib';
+import { IRecipeLib } from './libs/recipeLib';
+import { IArtLib } from './libs/artLib';
+import { IMusicLib } from './libs/musicLib';
+
+import IMainLib from './interfaces/IMainLib';
 
 class MainLib implements IMainLib {
     private comicLib: IComicLib;
@@ -31,6 +39,9 @@ class MainLib implements IMainLib {
     private pictureLib: IPictureLib;
     private quizLib: IQuizLib;
     private tipLib: ITipLib;
+    private recipeLib: IRecipeLib;
+    private artLib: IArtLib;
+    private musicLib: IMusicLib;
 
 
     constructor(
@@ -44,7 +55,9 @@ class MainLib implements IMainLib {
         pictureLib: IPictureLib,
         quizLib: IQuizLib,
         tipLib: ITipLib,
-
+        recipeLib: IRecipeLib,
+        artLib: IArtLib,
+        musicLib: IMusicLib,
     ) {
         this.comicLib = comicLib;
         this.jokeLib = jokeLib;
@@ -56,7 +69,21 @@ class MainLib implements IMainLib {
         this.pictureLib = pictureLib;
         this.quizLib = quizLib;
         this.tipLib = tipLib;
+        this.recipeLib = recipeLib;
+        this.artLib = artLib;
+        this.musicLib = musicLib;
+    }
 
+    public async getRecipe() : Promise<Recipe> {
+        return await this.recipeLib.fetchRecipe();
+    }
+
+    public async getArt() : Promise<Art> {
+        return await this.artLib.fetchArt();
+    }
+
+    public async getMusic() : Promise<Music> {
+        return await this.musicLib.fetchMusic();
     }
   
     public async getJoke(): Promise<Joke> {
@@ -88,15 +115,7 @@ class MainLib implements IMainLib {
     }
 
     public async getCalvinAndHobbes(): Promise<CalvinAndHobbes> {
-        let result = await this.comicLib.fetchComic();
-        
-        // TODO: CLEANUP
-        if (!result) {
-            console.log('ERROR FETCHING CALVIN AND HOBBES');
-            const randomIndex = Math.floor(Math.random() * sampleCalvin.length);
-            result = sampleCalvin[randomIndex]; 
-        }
-        return result;
+        return await this.comicLib.fetchComic();
     }
 
     public async getQuiz(): Promise<Quiz> {

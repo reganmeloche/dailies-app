@@ -1,7 +1,7 @@
-import CalvinAndHobbes from '../classes/calvinAndHobbes';
+import CalvinAndHobbes, { sampleComic } from '../classes/calvinAndHobbes';
 
 export interface IComicLib {
-    fetchComic(): Promise<CalvinAndHobbes | null>;
+    fetchComic(): Promise<CalvinAndHobbes>;
 } 
 
 class ComicLib implements IComicLib {
@@ -11,17 +11,9 @@ class ComicLib implements IComicLib {
         this.baseUrl = 'https://www.gocomics.com/calvinandhobbes';
     }
 
-    public async fetchComic(): Promise<CalvinAndHobbes | null> {
-        try {
-            // Build the url with current date
-            const dateString = this.getDateString();
-            const url = this.baseUrl + '/' + dateString;
-
-            return new CalvinAndHobbes("");
-        } catch (error) {
-            console.error('Error fetching or parsing:', error);
-            return null;
-        }
+    public async fetchComic(): Promise<CalvinAndHobbes> {
+        console.error('Error fetching or parsing comic - Not implemented');
+        return sampleComic;
   }
 
     private getDateString(): string {

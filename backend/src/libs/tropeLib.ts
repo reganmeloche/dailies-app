@@ -1,4 +1,4 @@
-import Trope from '../classes/trope';
+import Trope, { sampleTrope } from '../classes/trope';
 import ITropeApi from '../helpers/tropeApi';
 
 export interface ITropeLib {
@@ -12,7 +12,12 @@ class TropeLib implements ITropeLib {
         this.api = api;
     }
     public async fetchTrope(): Promise<Trope> {
-        return await this.api.getTrope();
+        try {
+            return await this.api.getTrope();
+        } catch (error) {
+            console.error('Error fetching trope:', error);
+            return sampleTrope;
+        }
     }
 }
 

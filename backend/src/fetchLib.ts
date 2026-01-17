@@ -1,6 +1,5 @@
 import { CategoryEnum } from './helpers/initialCategories';
 import { PrismaClient } from '@prisma/client';
-import Utilities from './helpers/utilities';
 
 class FetchLib {
     private dbClient: PrismaClient;
@@ -11,10 +10,9 @@ class FetchLib {
 
     public async get(category:CategoryEnum): Promise<any> {
         const categoryKey: string = category; 
-        const dayKey: string = Utilities.getFormattedDay();
 
         const record = await this.dbClient.entry.findFirst({
-            where: { day: dayKey, category: categoryKey },
+            where: { category: categoryKey },
             orderBy: { datetime: 'desc' },
         });
 

@@ -2,25 +2,41 @@ import React from 'react';
 import { Category } from '@shared/category';
 
 interface MenuProps {
-    items: Category[];
-    selectedId: number | null;
-    onItemClick: (itemId: number) => void;
+    dailyItems: Category[];
+    weeklyItems: Category[];
+    selected: string | null;
+    onItemClick: (itemId: string) => void;
 }
 
-
-const Menu: React.FC<MenuProps> = ({ items, selectedId, onItemClick }) => {
+const Menu: React.FC<MenuProps> = ({ dailyItems, weeklyItems, selected, onItemClick }) => {
     return (
+        <>
         <div className="list-group">
-            {items.map(item => (
+            {dailyItems.map(item => (
             <button
                 key={item.id}
-                className={`list-group-item list-group-item-action ${selectedId === item.id ? 'active' : ''}`}
-                onClick={() => onItemClick(item.id)}
+                className={`list-group-item list-group-item-action ${selected === item.name ? 'active' : ''}`}
+                onClick={() => onItemClick(item.name)}
             >
                 {item.name}
             </button>
             ))}
         </div>
+        
+        <br/>
+        
+        <div className="list-group">
+            {weeklyItems.map(item => (
+            <button
+                key={item.id}
+                className={`list-group-item list-group-item-action ${selected === item.name ? 'active' : ''}`}
+                onClick={() => onItemClick(item.name)}
+            >
+                {item.name}
+            </button>
+            ))}
+        </div>
+        </>
     );
 };
 

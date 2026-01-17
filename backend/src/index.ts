@@ -73,8 +73,8 @@ app.post('/api/seed', async (req, res) => {
     }
 
     try {
-        const forceSeed = req.query.force === 'true';
-        seeder.trySeed(forceSeed);
+        const frequency = req.query.frequency as string || 'daily'
+        await seeder.seed(frequency);
         res.json('Seeding complete');
     } catch (error) {
         console.error('Seeding error: ', error);
@@ -82,10 +82,8 @@ app.post('/api/seed', async (req, res) => {
     }
 });
 
-// Force new seeding for a specific category
-app.post('/api/seed/:category', async (req, res) => {
-    const category = req.params.category as CategoryEnum;
-
+// Clear the data
+app.post('/api/clear', async (req, res) => {
     const secret = req.header('x-seed-secret');
     if (secret !== config.seedPassword) {
         res.status(403).json({ error: 'Invalid seed secret. '});
@@ -93,8 +91,10 @@ app.post('/api/seed/:category', async (req, res) => {
     }
 
     try {
-        seeder.seedCategory(category);
-        res.json('Seeding complete');
+        const weekAgo = new Date();
+        weekAgo.setDate(weekAgo.getDate() - 7);
+        await seeder.clearBefore(weekAgo);
+        res.json('Cleared DB entries older than one week');
     } catch (error) {
         console.error('Seeding error: ', error);
         res.status(500).json({ error: 'Seeding failed.' });

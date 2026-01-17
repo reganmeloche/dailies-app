@@ -1,7 +1,6 @@
 import { Category } from "./classes/category";
 import { PrismaClient } from "@prisma/client";
 import { CategoryEnum } from "./helpers/initialCategories";
-import Utilities from "./helpers/utilities";
 import IMainLib, { CacheKey } from "./interfaces/IMainLib";
 
 
@@ -29,43 +28,31 @@ class Seeder {
         [CategoryEnum.TROPE]: () => this.mainLib.getTrope(),
         [CategoryEnum.QUIZ]: () => this.mainLib.getQuiz(),
         [CategoryEnum.TIP]: () => this.mainLib.getTip(),
+        [CategoryEnum.RECIPE]: () => this.mainLib.getRecipe(),
+        [CategoryEnum.ART]: () => this.mainLib.getArt(),
+        [CategoryEnum.MUSIC]: () => this.mainLib.getMusic(),
     };
 
-    public async seedCategory(category: CategoryEnum) {
-        const dayKey = Utilities.getFormattedDay();
-
-        const result = await this.fetchFunctions[category]();
-
-        const newEntry = await this.dbClient.entry.create({
-            data: {
-                datetime: new Date(),
-                day: dayKey,
-                category: category,
-                content: JSON.stringify(result)
+    public async clearBefore(earliestDate: Date) {
+        await this.dbClient.entry.deleteMany({
+            where: {
+                datetime: { lt: earliestDate }
             }
         });
     }
 
-    public async trySeed(forceSeed = false) {
-        const dayKey = Utilities.getFormattedDay();
-
-        for (const x of this.categories) {
+    public async seed(freq: string = 'daily') {
+        const seedCategories = this.categories.filter(x => x.frequency === freq);
+        
+        for (const x of seedCategories) {
             const category = x.name as CategoryEnum;
-            
-            const check = await this.dbClient.entry.findFirst({
-                where: { day: dayKey, category: category }
-            });
-
-            if (check && !forceSeed) {
-                continue;
-            }
 
             const result = await this.fetchFunctions[category]();
 
             const newEntry = await this.dbClient.entry.create({
                 data: {
                     datetime: new Date(),
-                    day: dayKey,
+                    day: "", // Deprecated
                     category: category,
                     content: JSON.stringify(result)
                 }
