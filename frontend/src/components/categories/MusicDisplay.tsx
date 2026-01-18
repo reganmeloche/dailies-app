@@ -18,7 +18,7 @@ const MusicDisplay: React.FC = () => {
 
     return (
         <div className="component-container">
-            <h3 className="component-title">Tips</h3>
+            <h3 className="component-title">Music</h3>
             <div className="list-group">
             {music.recs.map((item, index) => (
                 <div key={index} className="list-group-item">

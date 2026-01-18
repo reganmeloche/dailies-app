@@ -3,7 +3,6 @@ import { PrismaClient } from "@prisma/client";
 import { CategoryEnum } from "./helpers/initialCategories";
 import IMainLib, { CacheKey } from "./interfaces/IMainLib";
 
-
 type FetchFunction<CacheKey> = () => Promise<CacheKey>;
 
 class Seeder {
@@ -32,6 +31,11 @@ class Seeder {
         [CategoryEnum.ART]: () => this.mainLib.getArt(),
         [CategoryEnum.MUSIC]: () => this.mainLib.getMusic(),
     };
+
+    public async fetchOnly(category: CategoryEnum): Promise<CacheKey> {
+        const result = await this.fetchFunctions[category]();
+        return result;
+    }
 
     public async clearBefore(earliestDate: Date) {
         await this.dbClient.entry.deleteMany({

@@ -18,7 +18,7 @@ const TropeDisplay: React.FC = () => {
     if (!trope) { return <p>Loading...</p>}
     return (
         <div className="component-container">
-            <h3 className="component-title">Trope of the Day</h3>
+            <h3 className="component-title">Trope</h3>
             <a className="trope-title" href={trope.link} target="_blank">{trope.title}</a>
             <div>
                 {trope.text.map((p, i) => (

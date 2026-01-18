@@ -96,8 +96,26 @@ app.post('/api/clear', async (req, res) => {
         await seeder.clearBefore(weekAgo);
         res.json('Cleared DB entries older than one week');
     } catch (error) {
-        console.error('Seeding error: ', error);
-        res.status(500).json({ error: 'Seeding failed.' });
+        console.error('Clearing error: ', error);
+        res.status(500).json({ error: 'Clearing DB failed.' });
+    }
+});
+
+// Fetch content for a category. Doesn't store it - mainly for testing
+app.get('/api/fetch/:category', async (req, res) => {
+    const secret = req.header('x-seed-secret');
+    if (secret !== config.seedPassword) {
+        res.status(403).json({ error: 'Invalid seed secret. '});
+        return;
+    }
+
+    try {
+        const category = req.params.category as CategoryEnum;
+        const result = await seeder.fetchOnly(category);
+        res.json(result);
+    } catch (error) {
+        console.error('fetching error: ', error);
+        res.status(500).json({ error: 'Fetching failed.' });
     }
 });
 

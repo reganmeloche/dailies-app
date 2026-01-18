@@ -70,6 +70,7 @@ function setup(config: Config): Services {
         'economics',
         'canadian politics',
         'political theory',
+        'nuclear energy and nuclear politics',
 
         'computer science',
         'software development',
@@ -94,7 +95,7 @@ function setup(config: Config): Services {
         new PoemLib(poemApi),
         new TropeLib(tropeApi),
         new FactLib(ninjaApi),
-        new PictureLib(unsplashApi),
+        new PictureLib(),
         new QuizLib(llmApi, quizTopics),
         new TipLib(llmApi, tipTopics),
         new RecipeLib(llmApi, cuisinePrompts),

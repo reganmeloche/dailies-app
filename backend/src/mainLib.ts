@@ -28,6 +28,7 @@ import { IMusicLib } from './libs/musicLib';
 
 import IMainLib from './interfaces/IMainLib';
 
+// TODO: Rename this to reflect that its for fetching originals
 class MainLib implements IMainLib {
     private comicLib: IComicLib;
     private jokeLib: IJokeLib;

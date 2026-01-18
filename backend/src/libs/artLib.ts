@@ -5,9 +5,8 @@ export interface IArtLib {
 } 
 
 class ArtLib implements IArtLib {
-
+    // TODO: Use the metmuseum API?
     public async fetchArt(): Promise<Art> {
-
         console.log('ERROR fetching art - Not implemented');
         return sampleArt;
     }

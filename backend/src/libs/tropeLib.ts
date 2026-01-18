@@ -11,6 +11,8 @@ class TropeLib implements ITropeLib {
     constructor(api: ITropeApi) {
         this.api = api;
     }
+
+    // Use TV tropes (Needs fixing)
     public async fetchTrope(): Promise<Trope> {
         try {
             return await this.api.getTrope();
