@@ -2,7 +2,7 @@ import Fact from '../classes/fact';
 import { INinjaApi } from '../helpers/ninjaApi';
 
 export interface IFactLib {
-    fetchFact(): Promise<Fact>;
+    fetchFact(): Promise<Fact | null>;
 } 
 
 class FactLib implements IFactLib {
@@ -12,9 +12,9 @@ class FactLib implements IFactLib {
         this.api = api;
     }
 
-    public async fetchFact(): Promise<Fact> {
+    public async fetchFact(): Promise<Fact| null> {
         const apiResponse = await this.api.fetch('facts');
-        return new Fact('',apiResponse[0]['fact']);
+        return new Fact('', apiResponse[0]['fact']);
     }
 }
 

@@ -1,11 +1,5 @@
 /* PoemDisplay.css */
-  .poem-title {
-    font-size: 2rem;
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333;
-  }
-  
+
   .poem-meta {
     margin-bottom: 20px;
     font-size: 1.1rem;
@@ -21,16 +15,16 @@
   }
   
   .poem-stanzas {
-    margin-top: 20px;
+    margin-top: 15px;
   }
   
   .stanza {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
   }
   
   .stanza-line {
-    font-size: 1.2rem;
-    line-height: 1.6;
+    font-size: 0.9rem;
+    line-height: 1.4;
     color: #333;
     text-align: center;
     margin: 5px 0;

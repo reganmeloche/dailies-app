@@ -1,6 +1,6 @@
 import React from 'react';
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import Navbar from './components/Navbar';
+//import Navbar from './components/Navbar';
 import Content from './components/Content';
 import config from './config';
 
@@ -9,8 +9,8 @@ const App: React.FC = () => {
   return (
     <GoogleOAuthProvider clientId={config.googleClientId}>
       <div>
-        <Navbar />
-        <div className="container-fluid" style={{ padding: 0, margin: 0, height: '90vh' }}>
+        {/* <Navbar /> */}
+        <div className="my-content container-fluid" style={{ padding: 0, margin: 0, height: '100vh' }}>
           <Content/>
         </div>
       </div>

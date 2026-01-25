@@ -1,8 +1,8 @@
-import Tip, { sampleTip } from '../classes/tip';
+import Tip from '../classes/tip';
 import { ILlmApi } from '../helpers/llmApi';
 
 export interface ITipLib {
-    fetchTips(): Promise<Tip>;
+    fetchTips(): Promise<Tip | null>;
 } 
 
 class TipLib implements ITipLib {
@@ -14,7 +14,7 @@ class TipLib implements ITipLib {
         this._tipTopics = tipTopics;
     }
 
-    public async fetchTips(): Promise<Tip> {
+    public async fetchTips(): Promise<Tip | null> {
         let topics = [];
 
         for (const topicSet of this._tipTopics) {
@@ -26,7 +26,7 @@ class TipLib implements ITipLib {
             Provide a useful, concrete, non-generic and detailed tip (20-40 words each) about each of the following topics: ${topics.join(', ')}. 
             
             Contstraints:
-            - Tips should be practical and actionable, not vague or abstract.
+            - Tips should be practical and actionable, not vague or abstract. Don't pick the super-obvious ones - think deeply about what would be genuinely helpful.
             - Avoid overly common advice; focus on unique and insightful suggestions.
             - One tip per topic 
             - Output requirements: Provide only valid JSON. Do not include explanations, markdown, or extra text. 
@@ -39,7 +39,7 @@ class TipLib implements ITipLib {
             return JSON.parse(response) as Tip;
         } catch (error){
             console.log('ERROR fetching tip', error);
-            return sampleTip;
+            return null;
         }
     }
 }

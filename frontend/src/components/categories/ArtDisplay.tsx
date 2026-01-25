@@ -18,25 +18,11 @@ const ArtDisplay: React.FC = () => {
     return (
         <div className="component-container">
             <h3 className="component-title">Artwork</h3>
-            
-            <figure className="art-figure">
-                <img
-                    src={art.url}
-                    alt={`${art.name} by ${art.artist}`}
-                    className="art-image"
-                />
-
-                <figcaption className="art-caption">
-                    <h4 className="art-name">{art.name}</h4>
-                    <p><strong>Artist:</strong> {art.artist}</p>
-                    <p><strong>Type:</strong> {art.type}</p>
-                    <p><strong>Year:</strong> {art.year}</p>
-
-                    <p className="art-description">
-                        {art.description}
-                    </p>
-                </figcaption>
-            </figure> 
+            <p className="my-label">{art.name} by {art.artist} ({art.year})</p>
+            <div className="my-frame">
+                <img src={art.url} alt={art.name} />
+            </div>
+            <p className="my-description">{art.description}</p>
         </div>
     );
 };

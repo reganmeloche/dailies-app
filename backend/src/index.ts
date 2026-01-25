@@ -1,4 +1,5 @@
 import express from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { CategoryEnum } from './helpers/initialCategories';
 import setup from './setup';
 import { Config } from './config';
@@ -24,8 +25,23 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // Setup
-const { fetchLib, categories, authLib, seeder } = setup(config);
+const { contentStorage, categories, authLib, seeder } = setup(config);
 
+// Middleware to require seed secret
+function requireSeedSecret(
+    req: Request,
+    res: Response,
+    next: NextFunction
+) {
+    const secret = req.header("x-seed-secret");
+    if (secret !== config.seedPassword) {
+        res.status(403).json({ error: "Invalid seed secret." });
+        return;
+    }
+    next();
+}
+
+// Fetch available categories
 app.get('/api/categories', (req, res) => {
     res.json(categories);
 });
@@ -64,14 +80,8 @@ app.post('/api/validate', async (req, res) => {
     }
 });
 
-// Seed the data
-app.post('/api/seed', async (req, res) => {
-    const secret = req.header('x-seed-secret');
-    if (secret !== config.seedPassword) {
-        res.status(403).json({ error: 'Invalid seed secret. '});
-        return;
-    }
-
+// Seed all data
+app.post('/api/seed', requireSeedSecret, async (req, res) => {
     try {
         const frequency = req.query.frequency as string || 'daily'
         await seeder.seed(frequency);
@@ -82,14 +92,20 @@ app.post('/api/seed', async (req, res) => {
     }
 });
 
-// Clear the data
-app.post('/api/clear', async (req, res) => {
-    const secret = req.header('x-seed-secret');
-    if (secret !== config.seedPassword) {
-        res.status(403).json({ error: 'Invalid seed secret. '});
-        return;
+// Seed a single category
+app.post('/api/seed/:category', requireSeedSecret, async (req, res) => {
+    try {
+        const category = req.params.category as CategoryEnum;
+        await seeder.seedSingleCategory(category);
+        res.json(`Seeding ${category} complete`);
+    } catch (error) {
+        console.error('Seeding error: ', error);
+        res.status(500).json({ error: 'Seeding failed.' });
     }
+});
 
+// Clear DB entries older than one week
+app.post('/api/clear', requireSeedSecret, async (req, res) => {
     try {
         const weekAgo = new Date();
         weekAgo.setDate(weekAgo.getDate() - 7);
@@ -102,13 +118,7 @@ app.post('/api/clear', async (req, res) => {
 });
 
 // Fetch content for a category. Doesn't store it - mainly for testing
-app.get('/api/fetch/:category', async (req, res) => {
-    const secret = req.header('x-seed-secret');
-    if (secret !== config.seedPassword) {
-        res.status(403).json({ error: 'Invalid seed secret. '});
-        return;
-    }
-
+app.get('/api/fetch/:category', requireSeedSecret, async (req, res) => {
     try {
         const category = req.params.category as CategoryEnum;
         const result = await seeder.fetchOnly(category);
@@ -119,11 +129,11 @@ app.get('/api/fetch/:category', async (req, res) => {
     }
 });
 
-// Get the content for a category
+// Retrieve the seeded content for a category
 app.get('/api/:category', async (req, res) => {
     try {
         const category = req.params.category as CategoryEnum;
-        const result = await fetchLib.get(category);
+        const result = await contentStorage.get(category);
         res.json(result);
     } catch (error) {
         console.error('Fetching error: ', error);

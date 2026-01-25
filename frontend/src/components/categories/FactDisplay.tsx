@@ -18,8 +18,8 @@ const FactDisplay: React.FC = () => {
     return (
         <div className="component-container">
             <h3 className="component-title">Fact of the Day</h3>
-            {fact.title && <p className="fact-title">{fact.title}</p>}
-            {fact.text && <p className="fact-text">{fact.text}</p>}
+            {fact.title && <p className="my-label">{fact.title}</p>}
+            {fact.text && <p className="my-description">{fact.text}</p>}
         </div>
     );
 };

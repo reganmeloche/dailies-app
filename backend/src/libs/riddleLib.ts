@@ -2,7 +2,7 @@ import Riddle from '../classes/riddle';
 import { INinjaApi } from '../helpers/ninjaApi';
 
 export interface IRiddleLib {
-    fetchRiddle(): Promise<Riddle>;
+    fetchRiddle(): Promise<Riddle | null>;
 } 
 
 class RiddleLib implements IRiddleLib {
@@ -12,7 +12,7 @@ class RiddleLib implements IRiddleLib {
         this.api = api;
     }
 
-    public async fetchRiddle(): Promise<Riddle> {
+    public async fetchRiddle(): Promise<Riddle | null> {
         const apiResponse = await this.api.fetch('riddles');
         return new Riddle(
             apiResponse[0]['title'],

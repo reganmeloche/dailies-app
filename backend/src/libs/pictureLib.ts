@@ -1,16 +1,12 @@
-import Picture, {samplePicture} from '../classes/picture';
-import { IUnsplashApi } from '../helpers/unsplashApi';
+import Picture from '../classes/picture';
 
 export interface IPictureLib {
-    fetchPicture(): Promise<Picture>;
+    fetchPicture(): Promise<Picture | null>;
 } 
 
 class PictureLib implements IPictureLib {
-
-    constructor() {
-    }
-
-    public async fetchPicture(): Promise<Picture> {
+    
+    public async fetchPicture(): Promise<Picture | null> {
         const date = new Date();
         const year = date.getFullYear();
         const month = String(date.getMonth()+1).padStart(2,'0');
@@ -35,7 +31,7 @@ class PictureLib implements IPictureLib {
             }
         } catch (error){
             console.log('ERROR fetching picture', error);
-            return samplePicture;
+            return null;
         }
     }    
 }

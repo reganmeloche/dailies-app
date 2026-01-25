@@ -1,8 +1,8 @@
-import Music, { sampleMusic } from '../classes/music';
+import Music from '../classes/music';
 import { ILlmApi } from '../helpers/llmApi';
 
 export interface IMusicLib {
-    fetchMusic(): Promise<Music>;
+    fetchMusic(): Promise<Music | null>;
 } 
 
 class MusicLib implements IMusicLib {
@@ -14,16 +14,16 @@ class MusicLib implements IMusicLib {
         this._genrePrompts = genrePrompts;
     }
 
-    public async fetchMusic(): Promise<Music> {
+    public async fetchMusic(): Promise<Music | null> {
         const prompt = `
-            Generate exactly 5 music recommendations.
+            Generate exactly 5 music recommendations. 
             
             Constraints: 
             - One should be classical. 1/10 chance of being well-known, 1/10 of being modern/experimental, 3/10 chance of being mid-late romantic, 3/10 chance of being C20, 2/10 chance of being piano-focused
-            - One should be a critically acclaimed pop/rock album
+            - One should be a critically acclaimed pop/rock album. Don't be too obvious - mix it up.
             - One should be a new release that you think I'll like
             - One should be electronic/ambient. 3/10 chance of being well-known, 1/10 of being experimental, 3/10 chance of being chill/ambient, 3/10 chance of being dance-oriented
-            - One should be from a genre I don't usually listen to (jazz, world, etc)
+            - One should be from a genre I don't usually listen to (jazz, world, etc). Don't be too obvious - mix it up.
             - Use a mix of different artists and styles across recommendations; avoid repetition where possible. Don't do too many obvious ones.
             - Output requirements: Provide only valid JSON. Do not include explanations, markdown, or extra text. 
             - Description must be 20-30 words.
@@ -36,7 +36,7 @@ class MusicLib implements IMusicLib {
             return JSON.parse(response) as Music
         } catch (error){
             console.log('ERROR fetching music', error);
-            return sampleMusic;
+            return null;
         }
     }
 }

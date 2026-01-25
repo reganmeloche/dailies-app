@@ -1,8 +1,8 @@
-import Recipe, { sampleRecipe } from '../classes/recipe';
+import Recipe from '../classes/recipe';
 import { ILlmApi } from '../helpers/llmApi';
 
 export interface IRecipeLib {
-    fetchRecipe(): Promise<Recipe>;
+    fetchRecipe(): Promise<Recipe | null>;
 }
 
 class RecipeLib implements IRecipeLib {
@@ -14,7 +14,7 @@ class RecipeLib implements IRecipeLib {
         this._cuisinePrompts = cuisinePrompts;
     } 
 
-    public async fetchRecipe(): Promise<Recipe> {
+    public async fetchRecipe(): Promise<Recipe | null> {
         const prompt = `
             Generate exactly 5 unique recipe ideas. Each recipe should include a name and a brief description (20-30 words).
             
@@ -32,23 +32,12 @@ class RecipeLib implements IRecipeLib {
         `;
 
         try {
-            // Run the query against the LLM
             const response = await this._llmApi.query(prompt); 
-
-            // Validation and Deserialization
-            const recipe = RecipeLib.convertToRecipe(response);
-
-            return recipe;
+            return JSON.parse(response) as Recipe;
         } catch (error){
-            // TODO: Will be logging this
             console.log('ERROR fetching recipe', error);
-            return sampleRecipe;
+            return null;
         }
-    }
-
-    private static convertToRecipe(strRecipe: string): Recipe {
-        const parsed = JSON.parse(strRecipe);
-        return parsed as Recipe;
     }
 }
 

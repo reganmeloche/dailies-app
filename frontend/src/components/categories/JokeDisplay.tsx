@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Joke from '@shared/joke';
-import './JokeDisplay.css';
 
 const JokeDisplay: React.FC = () => {
     const [joke, setJoke] = useState<Joke | null>(null);
@@ -19,8 +18,8 @@ const JokeDisplay: React.FC = () => {
     return (
         <div className="component-container">
             <h3 className="component-title">Joke of the Day</h3>
-            <p className="joke-question">{joke.question}</p>
-            {joke.punchline && <p className="joke-punchline">{joke.punchline}</p>}
+            <p className="my-label">{joke.question}</p>
+            {joke.punchline && <p className="my-description">{joke.punchline}</p>}
         </div>
     );
 };

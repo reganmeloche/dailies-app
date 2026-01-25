@@ -1,33 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import Trope from '@shared/trope';
-//import './TropeDisplay.css';
+import React from 'react';
 
 const TropeDisplay: React.FC = () => {
-    const [trope, setTrope] = useState<Trope | null>(null);
-
-    useEffect(() => {
-        const fetchTrope = async () => {
-            const response = await fetch('/api/trope');
-            const data = await response.json();
-            setTrope(data);
-        };
-    
-        fetchTrope();  
-    }, []);
-
-    if (!trope) { return <p>Loading...</p>}
     return (
         <div className="component-container">
             <h3 className="component-title">Trope</h3>
-            <a className="trope-title" href={trope.link} target="_blank">{trope.title}</a>
-            <div>
-                {trope.text.map((p, i) => (
-                    <p key={i} className="trope-line">{p}</p>
-                ))}
-            </div>
-            <img src={trope.pictureUrl} />
+            <p className="my-description"> Please visit <a href="https://tvtropes.org/" target="_blank"  rel="noreferrer">TVTropes</a></p>
         </div>
-
     );
 };
 

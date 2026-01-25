@@ -29,10 +29,10 @@ const Content: React.FC = () => {
 
     return (
         <div className="row" style={{ margin: 0, height:'100%' }}>
-            <div className="col-3" style={{ padding: 20 }}>
+            <div className="col-3" style={{ padding: 20, backgroundColor: '#1F2933'}}>
                 <Menu dailyItems={dailies} weeklyItems={weeklies} selected={selected} onItemClick={handleCategoryClick} />
             </div>
-            <div className="col-9" style={{ padding: 20, borderLeft: '2px solid #dee2e6' }}>
+            <div className="col-9" style={{ padding: 20, borderLeft: '2px solid #dee2e6', overflowY: 'auto', height:'100%' }}>
                 <Display selected={selected} />
             </div>
         </div>

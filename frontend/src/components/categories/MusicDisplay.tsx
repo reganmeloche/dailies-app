@@ -18,17 +18,15 @@ const MusicDisplay: React.FC = () => {
 
     return (
         <div className="component-container">
-            <h3 className="component-title">Music</h3>
-            <div className="list-group">
-            {music.recs.map((item, index) => (
-                <div key={index} className="list-group-item">
-                    <p>{item.album}</p>
-                    <p>{item.artist}</p>
-                    <p>{item.genre}</p>
-                    <p>{item.year}</p>
-                    <p>{item.description}</p>
-                </div>
-            ))}
+            <h3 className="component-title">Music Recommendations</h3>
+            <div className="music-list">
+                {music.recs.map((item, index) => (
+                    <div key={index} className="music-item">
+                        <p className="my-label">{item.album} - {item.artist}</p>
+                        <p className="my-description">{item.genre} • {item.year}</p>
+                        {item.description && <p className="my-description">{item.description}</p>}
+                    </div>
+                ))}
             </div>
         </div>
     );

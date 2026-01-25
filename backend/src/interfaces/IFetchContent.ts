@@ -16,18 +16,18 @@ import Music from '../classes/music';
 export type CacheKey = Joke | Riddle | Poem | Quote | Fact | CalvinAndHobbes | 
     Trope | Picture | Quiz | Tip | Recipe | Art | Music;
 
-export default interface IMainLib {
-    getJoke(): Promise<Joke>;
-    getQuote(): Promise<Quote>;
-    getRiddle(): Promise<Riddle>;
-    getPoem(): Promise<Poem>;
-    getFact(): Promise<Fact>;
-    getCalvinAndHobbes(): Promise<CalvinAndHobbes>;
-    getTrope(): Promise<Trope>,
-    getPicture(): Promise<Picture>,
-    getQuiz(): Promise<Quiz>,
-    getTip(): Promise<Tip>,
-    getRecipe(): Promise<Recipe>;
-    getArt(): Promise<Art>;
-    getMusic(): Promise<Music>;
+export default interface IFetchContent {
+    getJoke(): Promise<Joke | null>;
+    getQuote(): Promise<Quote | null>;
+    getRiddle(): Promise<Riddle | null>;
+    getPoem(): Promise<Poem | null>;
+    getFact(): Promise<Fact | null>;
+    getCalvinAndHobbes(): Promise<CalvinAndHobbes | null>;
+    getTrope(): Promise<Trope | null>,
+    getPicture(): Promise<Picture | null>,
+    getQuiz(): Promise<Quiz | null>,
+    getTip(): Promise<Tip | null>,
+    getRecipe(): Promise<Recipe | null>;
+    getArt(): Promise<Art | null>;
+    getMusic(): Promise<Music | null>;
 } 

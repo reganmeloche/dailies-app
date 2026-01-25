@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import Quiz from '@shared/quiz';
 
 const QuizDisplay: React.FC = () => {
@@ -16,13 +15,9 @@ const QuizDisplay: React.FC = () => {
   };
 
     useEffect(() => {
-        const accessToken = localStorage.getItem('accessToken');
-
-        const fetchQuiz = async () => {
-            const response = await axios.get('/api/quiz', {
-                headers: { Authorization: `Bearer ${accessToken}` },
-            });
-            const newQuiz: Quiz = response.data;
+    const fetchQuiz = async () => {
+            const response = await fetch('/api/quiz');
+            const newQuiz: Quiz = await response.json();
             setQuiz(newQuiz);
             setVisibleAnswers(Array(newQuiz.questions.length).fill(false));
             setVisibleExplanations(Array(newQuiz.questions.length).fill(false));
@@ -34,17 +29,17 @@ const QuizDisplay: React.FC = () => {
     if (!quiz) { return <p>Loading...</p>}
     return (
         <div className="component-container">
-            <h3 className="component-title">Quiz: {quiz.title}</h3>
+            <h3 className="component-title">Daily Quiz: {quiz.title}</h3>
             <div className="list-group">
             {quiz.questions.map((item, index) => (
                 <div key={index} className="list-group-item">
-                    <p className="fw-bold">{item.question}</p>
+                    <p className="my-label">{item.question}</p>
                     <div>
                         {visibleAnswers[index] ? (<p className="text-success">Answer: {item.answer}</p>) : 
                             <button className="btn btn-link" onClick={() => toggleAnswer(index)}>Answer</button> }
                     </div>
                     <div>
-                        {visibleExplanations[index] ? (<p className="text-muted">Explanation: {item.explanation}</p>) :
+                        {visibleExplanations[index] ? (<p className="my-description">Explanation: {item.explanation}</p>) :
                             <button className="btn btn-link" onClick={() => toggleExplanation(index)}>Explanation</button> }
                     </div>
                 </div>

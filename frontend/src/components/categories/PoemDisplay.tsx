@@ -18,13 +18,9 @@ const PoemDisplay: React.FC = () => {
     if (!poem) { return <p>Loading...</p>}
     return (
         <div className="component-container">
-            <h3 className="poem-title">Poem</h3>
-            
-            <div className="poem-meta">
-                <p className="poem-meta-item"><strong>Title:</strong> {poem.title}</p>
-                <p className="poem-meta-item"><strong>Author:</strong> {poem.author}</p>
-            </div>
-            
+            <h3 className="component-title">Poem of the Week</h3>
+            <p className="my-label">{poem.title} - {poem.author}</p>
+         
             <div className="poem-stanzas">
                 {poem.stanzas.map((stanza, stanza_i) => (
                 <div key={stanza_i} className="stanza">

@@ -2,7 +2,7 @@ import Quote from '../classes/quote';
 import { INinjaApi } from '../helpers/ninjaApi';
 
 export interface IQuoteLib {
-    fetchQuote(): Promise<Quote>;
+    fetchQuote(): Promise<Quote | null>;
 } 
 
 class QuoteLib implements IQuoteLib {
@@ -12,7 +12,7 @@ class QuoteLib implements IQuoteLib {
         this.api = api;
     }
 
-    public async fetchQuote(): Promise<Quote> {
+    public async fetchQuote(): Promise<Quote | null> {
         const apiResponse = await this.api.fetch('quotes');
         return new Quote(
             apiResponse[0]['author'],

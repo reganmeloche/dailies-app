@@ -26,10 +26,10 @@ import { IRecipeLib } from './libs/recipeLib';
 import { IArtLib } from './libs/artLib';
 import { IMusicLib } from './libs/musicLib';
 
-import IMainLib from './interfaces/IMainLib';
+import IFetchContent from './interfaces/IFetchContent';
 
-// TODO: Rename this to reflect that its for fetching originals
-class MainLib implements IMainLib {
+// Class for fetching original content from various libraries
+class ContentFetcher implements IFetchContent {
     private comicLib: IComicLib;
     private jokeLib: IJokeLib;
     private quoteLib: IQuoteLib;
@@ -75,58 +75,58 @@ class MainLib implements IMainLib {
         this.musicLib = musicLib;
     }
 
-    public async getRecipe() : Promise<Recipe> {
+    public async getRecipe() : Promise<Recipe | null> {
         return await this.recipeLib.fetchRecipe();
     }
 
-    public async getArt() : Promise<Art> {
+    public async getArt() : Promise<Art | null> {
         return await this.artLib.fetchArt();
     }
 
-    public async getMusic() : Promise<Music> {
+    public async getMusic() : Promise<Music | null> {
         return await this.musicLib.fetchMusic();
     }
   
-    public async getJoke(): Promise<Joke> {
+    public async getJoke(): Promise<Joke | null> {
         return await this.jokeLib.fetchJoke();
     }
 
-    public async getQuote(): Promise<Quote> {
+    public async getQuote(): Promise<Quote | null> {
         return await this.quoteLib.fetchQuote();
     }
 
-    public async getRiddle(): Promise<Riddle> {
+    public async getRiddle(): Promise<Riddle | null> {
         return await this.riddleLib.fetchRiddle();
     }
 
-    public async getPoem(): Promise<Poem> {
+    public async getPoem(): Promise<Poem | null> {
         return await this.poemLib.fetchPoem();
     }
 
-    public async getTrope(): Promise<Trope> {
+    public async getTrope(): Promise<Trope | null> {
         return await this.tropeLib.fetchTrope();
     }
 
-    public async getFact(): Promise<Fact> {
+    public async getFact(): Promise<Fact | null> {
         return await this.factLib.fetchFact();
     }
 
-    public async getPicture(): Promise<Picture> {
+    public async getPicture(): Promise<Picture | null> {
         return await this.pictureLib.fetchPicture();
     }
 
-    public async getCalvinAndHobbes(): Promise<CalvinAndHobbes> {
+    public async getCalvinAndHobbes(): Promise<CalvinAndHobbes | null> {
         return await this.comicLib.fetchComic();
     }
 
-    public async getQuiz(): Promise<Quiz> {
+    public async getQuiz(): Promise<Quiz | null> {
         return await this.quizLib.fetchQuiz();
     }
 
-    public async getTip(): Promise<Tip> {
+    public async getTip(): Promise<Tip | null> {
         return await this.tipLib.fetchTips();
     }
   }
   
-  export default MainLib;
+  export default ContentFetcher;
   

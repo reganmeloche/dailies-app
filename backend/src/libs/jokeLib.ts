@@ -2,7 +2,7 @@ import Joke from '../classes/joke';
 import { INinjaApi } from '../helpers/ninjaApi';
 
 export interface IJokeLib {
-    fetchJoke(): Promise<Joke>;
+    fetchJoke(): Promise<Joke | null>;
 } 
 
 class JokeLib implements IJokeLib {
@@ -12,7 +12,7 @@ class JokeLib implements IJokeLib {
         this.api = api;
     }
 
-    public async fetchJoke(): Promise<Joke> {
+    public async fetchJoke(): Promise<Joke | null> {
         const apiResponse = await this.api.fetch('jokes');
         return new Joke(apiResponse[0]['joke'], '');
     }

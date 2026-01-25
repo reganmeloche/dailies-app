@@ -20,19 +20,19 @@ export enum CategoryEnum {
 // Likely don't need the ids...
 export const initialCategories: Category[] = [
     // Daily
-    { id: 1, name: CategoryEnum.JOKE, frequency: 'daily' },
-    { id: 2, name: CategoryEnum.FACT, frequency: 'daily' },
-    { id: 3, name: CategoryEnum.RIDDLE, frequency: 'daily' },
-    { id: 4, name: CategoryEnum.QUOTE, frequency: 'daily' },
-    { id: 5, name: CategoryEnum.PICTURE, frequency: 'daily' },
-    { id: 6, name: CategoryEnum.QUIZ, frequency: 'daily' },
-    { id: 7, name: CategoryEnum.TIP, frequency: 'daily' },
-    { id: 8, name: CategoryEnum.COMIC, frequency: 'daily' },
+    { name: CategoryEnum.JOKE, frequency: 'daily', title: 'Joke' },
+    { name: CategoryEnum.FACT, frequency: 'daily', title: 'Fact' },
+    { name: CategoryEnum.RIDDLE, frequency: 'daily', title: 'Riddle' },
+    { name: CategoryEnum.QUOTE, frequency: 'daily', title: 'Quote' },
+    { name: CategoryEnum.PICTURE, frequency: 'daily', title: 'Picture' },
+    { name: CategoryEnum.QUIZ, frequency: 'daily', title: 'Quiz' },
+    { name: CategoryEnum.TIP, frequency: 'daily', title: 'Tip' },
+    { name: CategoryEnum.COMIC, frequency: 'daily', title: 'Comic' },
 
     // Weekly
-    { id: 12, name: CategoryEnum.POEM, frequency: 'weekly' },
-    { id: 13, name: CategoryEnum.ART, frequency: 'weekly' },
-    { id: 14, name: CategoryEnum.TROPE, frequency: 'weekly' },
-    { id: 15, name: CategoryEnum.MUSIC, frequency: 'weekly' },
-    { id: 16, name: CategoryEnum.RECIPE, frequency: 'weekly' },
+    { name: CategoryEnum.POEM, frequency: 'weekly', title: 'Poem' },
+    { name: CategoryEnum.ART, frequency: 'weekly', title: 'Art' },
+    { name: CategoryEnum.TROPE, frequency: 'weekly', title: 'Trope' },
+    { name: CategoryEnum.MUSIC, frequency: 'weekly', title: 'Music' },
+    { name: CategoryEnum.RECIPE, frequency: 'weekly', title: 'Recipe' },
 ];

@@ -1,31 +1,88 @@
-/* Overall joke container */
+.my-content {
+  background-color: #F5F6F8;
+}
+
+/* Overall container */
 .component-container {
-    max-width: 1000px;
-    min-width:400px;
-    margin: 0 auto;
-    padding: 20px;
-    font-family: 'Georgia', serif;
-    background-color: #f7f7f7;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: all 0.3s ease-in-out;
-  }
+  max-width: 1000px;
+  min-width:400px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Georgia', serif;
+  background-color: #f7f7f7;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+}
   
-  /* Hover effect for the joke container */
-  .component-container:hover {
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
-    transform: translateY(-5px);
-  }
+
+/* Title styling */
+.component-title {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.list-group-item.active,
+.list-group-item.active:hover,
+.list-group-item.active:focus {
+    background-color: #e09026;
+    border-color: #e09026;
+    color: #fff;
+}
   
-  /* Title styling */
-  .component-title {
-    font-size: 1.8rem;
-    color: #333;
-    margin-bottom: 15px;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-  
+.my-label {
+  font-size: 1rem;
+  font-weight: 550;
+  color: #e09026;
+}
+
+.my-description {
+  font-size: 0.9rem;
+  color: #444;
+}
+
+.my-frame {
+  display: inline-block;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 4px;
+  background-color: #fafafa;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.my-frame img {
+  display: block;
+  max-width: 400px;
+  border-radius: 6px;
+}
+
+
+.quote-text {
+  font-size: 1.05rem;
+  color: #333;
+  font-style: italic;
+}
+
+.quote-author {
+  margin-top: 0.4rem;
+  color: #666;
+}
+
+.music-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* space between items */
+}
+
+.music-item {
+  padding: 12px 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #fafafa;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+}

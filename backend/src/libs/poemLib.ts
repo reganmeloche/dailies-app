@@ -2,7 +2,7 @@ import Poem from '../classes/poem';
 import { IPoemApi } from '../helpers/poemApi';
 
 export interface IPoemLib {
-    fetchPoem(): Promise<Poem>;
+    fetchPoem(): Promise<Poem | null>;
 } 
 
 class PoemLib implements IPoemLib {
@@ -11,7 +11,7 @@ class PoemLib implements IPoemLib {
     constructor(api: IPoemApi) {
         this.api = api;
     }
-    public async fetchPoem(): Promise<Poem> {
+    public async fetchPoem(): Promise<Poem | null> {
         const result = await this.api.getDailyPoem();
         return result;
     }

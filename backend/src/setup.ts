@@ -1,7 +1,7 @@
 import ComicLib from "./libs/comicLib";
 import { initialCategories } from "./helpers/initialCategories";
 import JokeLib from "./libs/jokeLib";
-import MainLib from "./mainLib";
+import ContentFetcher from "./contentFetcher";
 import NinjaApi from "./helpers/ninjaApi";
 import { Config } from './config';
 import { Category } from "./classes/category";
@@ -21,14 +21,14 @@ import Seeder from "./seeder";
 import { OAuth2Client } from 'google-auth-library';
 import OpenAiApi, { OpenAiOptions } from "./helpers/llmApi";
 import { PrismaClient } from '@prisma/client';
-import FetchLib from "./fetchLib";
+import ContentStorage from "./contentStorage";
 import TipLib from "./libs/tipLib";
 import RecipeLib from "./libs/recipeLib";
 import ArtLib from "./libs/artLib";
 import MusicLib from "./libs/musicLib";
 
 interface Services {
-    fetchLib: FetchLib,
+    contentStorage: ContentStorage,
     categories: Category[],
     authLib: AuthLib,
     seeder: Seeder
@@ -38,7 +38,6 @@ function setup(config: Config): Services {
     const ninjaApi = new NinjaApi(config.ninjasApiKey);
     const poemApi = new PoemApi();
     const tropeApi = new TropeApi();
-    const unsplashApi = new UnsplashApi(config.unsplashAccessKey);
 
     const googleClient = new OAuth2Client(config.googleClientId, config.googleClientSecret, config.googleRedirectURI);
     const authLib = new AuthLib(googleClient);
@@ -53,7 +52,6 @@ function setup(config: Config): Services {
     );
     const llmApi = new OpenAiApi(openAiOptions);
 
-    // TODO: This will eventually come from somewhere else
     const quizTopics = [
         'databases', 
         'health and nutrition', 
@@ -87,7 +85,7 @@ function setup(config: Config): Services {
 
     const genrePrompts: string[] = [];
 
-    const lib = new MainLib(
+    const lib = new ContentFetcher(
         new ComicLib(),
         new JokeLib(ninjaApi),
         new QuoteLib(ninjaApi),
@@ -107,7 +105,7 @@ function setup(config: Config): Services {
     const seeder = new Seeder(lib, initialCategories, dbClient);
 
     const services: Services = {
-        fetchLib: new FetchLib(dbClient),
+        contentStorage: new ContentStorage(dbClient),
         categories: initialCategories,
         authLib: authLib,
         seeder: seeder,

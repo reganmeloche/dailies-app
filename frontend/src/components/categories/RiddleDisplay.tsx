@@ -18,9 +18,9 @@ const RiddleDisplay: React.FC = () => {
     return (
         <div className="component-container">
             <h3 className="component-title">Riddle of the Day</h3>
-            {riddle.title && <p className="riddle-title">{riddle.title}</p>}
-            {riddle.question && <p className="riddle-question">{riddle.question}</p>}
-            {riddle.answer && <p className="riddle-question">{riddle.answer}</p>}
+            {riddle.title && <p className="my-label">{riddle.title}</p>}
+            {riddle.question && <p className="my-description">{riddle.question}</p>}
+            {riddle.answer && <p className="my-description">{riddle.answer}</p>}
         </div>
     );
 };

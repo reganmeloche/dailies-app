@@ -1,4 +1,4 @@
-name: Daily HTTP Call
+name: Scheduled Calls
 
 on:
   schedule:

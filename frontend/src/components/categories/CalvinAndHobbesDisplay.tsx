@@ -1,24 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import CalvinAndHobbes from '@shared/calvinAndHobbes';
+import React from 'react';
 
 const CalvinAndHobbesDisplay: React.FC = () => {
-    const [comic, setComic] = useState<CalvinAndHobbes | null>(null);
-
-    useEffect(() => {
-        const fetchQuote = async () => {
-            const response = await fetch('/api/comic');
-            const data = await response.json();
-            setComic(data);
-        };
-    
-        fetchQuote();  
-    }, []);
-
-    if (!comic) { return <p>Loading...</p>}
     return (
         <div className="component-container">
             <h3 className="component-title">Calvin and Hobbes</h3>
-            <img src={comic.urlString}/>
+            <p className="my-description"> Please visit <a href="https://www.gocomics.com/calvinandhobbes" target="_blank"  rel="noreferrer">GoComics</a></p>
         </div>
     );
 };

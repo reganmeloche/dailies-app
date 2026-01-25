@@ -1,8 +1,8 @@
-import Quiz, { sampleQuiz } from '../classes/quiz';
+import Quiz from '../classes/quiz';
 import { ILlmApi } from '../helpers/llmApi';
 
 export interface IQuizLib {
-    fetchQuiz(): Promise<Quiz>;
+    fetchQuiz(): Promise<Quiz | null>;
 } 
 
 class QuizLib implements IQuizLib {
@@ -14,7 +14,7 @@ class QuizLib implements IQuizLib {
         this._quizTopics = quizTopics;
     }
 
-    public async fetchQuiz(): Promise<Quiz> {
+    public async fetchQuiz(): Promise<Quiz | null> {
         // Choose randomly from the list of topics
         const randomIndex = Math.floor(Math.random() * this._quizTopics.length);
         const topic = this._quizTopics[randomIndex];
@@ -26,7 +26,7 @@ class QuizLib implements IQuizLib {
             return JSON.parse(response) as Quiz;
         } catch (error){
             console.log('ERROR fetching quiz', error);
-            return sampleQuiz;
+            return null;
         }
     }
 
@@ -36,7 +36,7 @@ class QuizLib implements IQuizLib {
             Generate a quiz with ${numQuestions} short answer questions about the following topic: ${topic}. 
             
             Constraints:
-            - Questions should cover a range of subtopics within the topic
+            - Questions should cover a range of subtopics within the topic. Don't pick too many obvious questions - mix it up.
             - Avoid overly obscure or trivial facts; focus on interesting and educational content. Keep it interesting and don't always go for the most obvious facts.
             - Output requirements: Provide only valid JSON. Do not include explanations, markdown, or extra text. 
             - Each answer should be 1-10 words. Each explanation should be about 3-4 sentences. The difficulty should be ${difficulty}.
