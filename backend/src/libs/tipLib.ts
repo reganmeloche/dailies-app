@@ -1,5 +1,6 @@
 import Tip from '../classes/tip';
 import { ILlmApi } from '../helpers/llmApi';
+import logger from '../utils/logger';
 
 export interface ITipLib {
     fetchTips(): Promise<Tip | null>;
@@ -28,6 +29,9 @@ class TipLib implements ITipLib {
             Contstraints:
             - Tips should be practical and actionable, not vague or abstract. Don't pick the super-obvious ones - think deeply about what would be genuinely helpful.
             - Avoid overly common advice; focus on unique and insightful suggestions.
+            - Do NOT give advice that would appear in a beginner blog post, FAQ, or top-10 list.
+            - Assume the reader already knows the obvious basics. You are writing advice from one experienced practitioner to another.
+            - If a tip could apply to most people, it is invalid.
             - One tip per topic 
             - Output requirements: Provide only valid JSON. Do not include explanations, markdown, or extra text. 
 
@@ -38,7 +42,7 @@ class TipLib implements ITipLib {
             const response = await this._llmApi.query(prompt); 
             return JSON.parse(response) as Tip;
         } catch (error){
-            console.log('ERROR fetching tip', error);
+            logger.error('Error fetching tips', { error });
             return null;
         }
     }

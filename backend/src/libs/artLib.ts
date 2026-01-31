@@ -1,66 +1,48 @@
 import Art from '../classes/art';
+import { IArtApi } from '../helpers/artApi';
+import logger from '../utils/logger';
 
 export interface IArtLib {
     fetchArt(): Promise<Art| null>;
 } 
 
 class ArtLib implements IArtLib {
-    private baseUrl: string;
-    private randomCount: number;
+    private _artApi: IArtApi;
 
-    constructor() {
-        this.baseUrl = 'https://collectionapi.metmuseum.org/public/collection/v1';
-        this.randomCount = 5;
+    constructor(artApi: IArtApi) {
+        this._artApi = artApi;
     }
 
     public async fetchArt(): Promise<Art | null> {
-        const objectIds = await this.getObjectIds(this.randomCount);
+        // Get the object ids; shuffle and take a small subset of 5
+        const objectIds = await this._artApi.fetchObjectIds();
+        const shuffled = [...objectIds].sort(() => 0.5 - Math.random());
+        const targetIds = shuffled.slice(0, 5);
 
         // Try each id until we find one with an image
-        if (objectIds && objectIds.length > 0) {
-            for (let i of objectIds) {
-                const art = await this.fetchApiArtById(i);
-                if (art && art.primaryImage != "") {
+        if (targetIds && targetIds.length > 0) {
+            for (let i of targetIds) {
+                const obj = await this._artApi.fetchArtObject(i);
+                if (obj && obj.primaryImage != "") {
                     return new Art(
-                        art.title,
-                        art.artistDisplayName,
-                        art.medium,
-                        art.primaryImage,
-                        art.objectDate,
-                        art.creditLine
+                        obj.title,
+                        obj.artistDisplayName,
+                        obj.medium,
+                        obj.primaryImage,
+                        obj.objectDate,
+                        obj.creditLine
                     );
                 }
-                console.log('WARNING: Skipping art id', i, ' - No primary image');
+                logger.warn('Skipping art id %d: No primary image', i);
             }
-            console.log('ERROR fetching art - no images found'); 
+            logger.error('Error fetching art: no images found'); 
+            return null;
         }
 
-        console.log('ERROR fetching art - no ids found');
+        logger.error('Error fetching art: no ids found');
         return null;
     }
 
-    private async fetchApiArtById(id: number): Promise<any> {
-        const url = `${this.baseUrl}/objects/${id}`;
-        const response = await fetch(url);
-        if (!response.ok) return null;
-        return response.json();
-    }
-
-    private async getObjectIds(count:number): Promise<number[] | null> {
-        const url = `${this.baseUrl}/objects`;
-        const response = await fetch(url);
-        if (!response.ok) return null;
-
-        const data: {
-            total: number;
-            objectIDs: number[] | null;
-        } = await response.json();
-
-        const objectIDs = data.objectIDs || [];
-
-        const shuffled = [...objectIDs].sort(() => 0.5 - Math.random());
-        return shuffled.slice(0, count);
-    }
 }
 
 export default ArtLib;

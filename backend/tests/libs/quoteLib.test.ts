@@ -23,7 +23,7 @@ describe('QuoteLib Tests', () => {
         ];
         api.fetch.mockResolvedValue(testApiValue);
         const result = await sut.fetchQuote();
-        expect(result.author).toEqual('Friedrich Schiller')
+        expect(result!.author).toEqual('Friedrich Schiller')
         expect(api.fetch).toHaveBeenCalled();
     });
 

@@ -1,13 +1,21 @@
-import globals from "globals";
-import pluginJs from "@eslint/js";
-import tseslint from "typescript-eslint";
-
+import tsPlugin from "@typescript-eslint/eslint-plugin";
+import tsParser from "@typescript-eslint/parser";
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
-  {files: ["**/*.{js,mjs,cjs,ts}"]},
-  {files: ["**/*.js"], languageOptions: {sourceType: "commonjs"}},
-  {languageOptions: { globals: globals.browser }},
-  pluginJs.configs.recommended,
-  ...tseslint.configs.recommended,
+  {
+    files: ["**/*.ts"], // all TypeScript files
+    languageOptions: {
+      parser: tsParser, // use the imported parser object, not a string
+    },
+    plugins: {
+      "@typescript-eslint": tsPlugin,
+    },
+    rules: {
+      // Use the recommended TypeScript rules
+      ...tsPlugin.configs.recommended.rules,
+      // Optional: turn off the annoying unused-expressions rule for Winston logs
+      "@typescript-eslint/no-unused-expressions": "off"
+    },
+  },
 ];

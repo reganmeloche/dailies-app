@@ -23,7 +23,7 @@ describe('RiddleLib Tests', () => {
         ];
         api.fetch.mockResolvedValue(testApiValue);
         const result = await sut.fetchRiddle();
-        expect(result.answer).toEqual('a tree')
+        expect(result!.answer).toEqual('a tree')
         expect(api.fetch).toHaveBeenCalled();
     });
 

@@ -1,7 +1,7 @@
 import { OAuth2Client } from 'google-auth-library';
 import { google } from 'googleapis';
 import axios from 'axios';
-
+import logger from '../utils/logger';
 
 class AuthLib {
     private googleClient: OAuth2Client; 
@@ -31,8 +31,8 @@ class AuthLib {
             const user = await this.getUserInfo();
             return { user };
         } else {
-            console.error('Invalid payload');
-            // TODO: Handle this case 
+            logger.error('Invalid payload when validating access token', { data });
+            // TODO: Handle this case...
         }
     }
 

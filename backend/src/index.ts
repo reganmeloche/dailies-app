@@ -5,6 +5,7 @@ import setup from './setup';
 import { Config } from './config';
 import path from 'path';
 import dotenv from 'dotenv';
+import logger from './utils/logger';
 
 dotenv.config();
 const app = express();
@@ -16,7 +17,7 @@ app.use(express.json());
 // Get config
 let config: Config;
 if (process.env.NODE_ENV === 'development') {
-    console.log('Working in dev mode...');
+    logger.info('Running in dev mode...');
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     config = require('./configdev').default;
 } else {
@@ -58,7 +59,7 @@ app.post('/api/auth', async (req, res) => {
         const authResult = await authLib.authSetup(code);
         res.json(authResult);
     } catch (error) {
-        console.error('Error in Google Auth:', error);
+        logger.error('Auth error', { error });
         res.status(500).json({ error: 'Authentication failed' });
     }
 });
@@ -75,7 +76,7 @@ app.post('/api/validate', async (req, res) => {
         const validationResult = await authLib.validateAccessToken(token);
         res.json(validationResult);
     } catch (error) {
-        console.error('Error in Google Auth:', error);
+        logger.error('Auth Validation error', { error });
         res.status(500).json({ error: 'Authentication failed' });
     }
 });
@@ -87,7 +88,7 @@ app.post('/api/seed', requireSeedSecret, async (req, res) => {
         await seeder.seed(frequency);
         res.json('Seeding complete');
     } catch (error) {
-        console.error('Seeding error: ', error);
+        logger.error('Seeding error', { error });
         res.status(500).json({ error: 'Seeding failed.' });
     }
 });
@@ -99,7 +100,7 @@ app.post('/api/seed/:category', requireSeedSecret, async (req, res) => {
         await seeder.seedSingleCategory(category);
         res.json(`Seeding ${category} complete`);
     } catch (error) {
-        console.error('Seeding error: ', error);
+        logger.error('Category Seeding error', { error });
         res.status(500).json({ error: 'Seeding failed.' });
     }
 });
@@ -112,7 +113,7 @@ app.post('/api/clear', requireSeedSecret, async (req, res) => {
         await seeder.clearBefore(weekAgo);
         res.json('Cleared DB entries older than one week');
     } catch (error) {
-        console.error('Clearing error: ', error);
+        logger.error('DB Clearing error', { error });
         res.status(500).json({ error: 'Clearing DB failed.' });
     }
 });
@@ -124,7 +125,7 @@ app.get('/api/fetch/:category', requireSeedSecret, async (req, res) => {
         const result = await seeder.fetchOnly(category);
         res.json(result);
     } catch (error) {
-        console.error('fetching error: ', error);
+        logger.error('Fetch error', { error });
         res.status(500).json({ error: 'Fetching failed.' });
     }
 });
@@ -136,7 +137,7 @@ app.get('/api/:category', async (req, res) => {
         const result = await contentStorage.get(category);
         res.json(result);
     } catch (error) {
-        console.error('Fetching error: ', error);
+        logger.error('Category retrieval error', { error });
         res.status(500).json({ error: `Fetching ${req.params.category} failed.` });
     }
 });
@@ -153,5 +154,5 @@ if (process.env.NODE_ENV !== 'development') {
 }
 
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  logger.info('Server is up and running on port %d', PORT);
 });

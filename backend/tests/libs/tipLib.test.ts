@@ -17,8 +17,8 @@ describe('TipLib Tests', () => {
         const testApiValue = sampleTipString;
         api.query.mockResolvedValue(testApiValue);
         const result = await sut.fetchTips();
-        expect(result.tips.length).toEqual(3);
-        expect(result.tips[0].theme).toEqual('health');
+        expect(result!.tips.length).toEqual(3);
+        expect(result!.tips[0].theme).toEqual('health');
         
         expect(api.query).toHaveBeenCalled();
     });

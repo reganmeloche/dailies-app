@@ -1,8 +1,8 @@
-import axios from 'axios';
-import Poem, { Stanza } from '../classes/poem';
+import logger from '../utils/logger';
 
 export interface IPoemApi {
-    getDailyPoem(): Promise<Poem>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    fetchRandomPoems(count: number): Promise<any>;
 } 
 
 export default class PoemApi implements IPoemApi {
@@ -12,24 +12,16 @@ export default class PoemApi implements IPoemApi {
         this._url = "https://poetrydb.org/random";
     }
 
-    public async getDailyPoem(): Promise<Poem> {
-        const poemCount = 5;
-        const apiResponse = await axios.get(`${this._url}/${poemCount}`);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    public async fetchRandomPoems(count: number): Promise<any> {
+        const response = await fetch(`${this._url}/${count}`);
         
-        const d = apiResponse.data;
+        if (!response.ok) {
+            logger.error("Poem Api fetch response error");
+            return null;
+        }
 
-        const lowestIndex = d.reduce((res:number, curr:any, i:number) => {
-            return Number(curr['linecount']) < Number(d[i]['linecount']) ? i : res;
-          }, 0);
-
-        const p1 = apiResponse.data[lowestIndex];
-
-        return new Poem(
-            p1['author'],
-            p1['title'],
-            [
-                new Stanza(p1['lines'])
-            ]
-        );
+        const data = await response.json();
+        return data;
     }
 }

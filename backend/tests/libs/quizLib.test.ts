@@ -10,17 +10,17 @@ describe('QuizLib Tests', () => {
     beforeEach(() => {
         api = mock<ILlmApi>();
 
-        sut = new QuizLib(api, ['Test']);
+        sut = new QuizLib(api, [['Test', 'easy']]);
     });
 
     it('should get quiz', async () => {
         const testApiValue = sampleQuizString;
         api.query.mockResolvedValue(testApiValue);
         const result = await sut.fetchQuiz();
-        expect(result.title).toEqual('ACID Databases Quiz');
-        expect(result.questions.length).toEqual(5);
-        expect(result.questions[0].id).toEqual(1);
-        expect(result.questions[3].answer).toEqual('Durability');
+        expect(result!.title).toEqual('ACID Databases Quiz');
+        expect(result!.questions.length).toEqual(5);
+        expect(result!.questions[0].id).toEqual(1);
+        expect(result!.questions[3].answer).toEqual('Durability');
         
         expect(api.query).toHaveBeenCalled();
     });

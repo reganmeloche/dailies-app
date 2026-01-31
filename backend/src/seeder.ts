@@ -1,9 +1,10 @@
 import { Category } from "./classes/category";
 import { PrismaClient } from "@prisma/client";
 import { CategoryEnum } from "./helpers/initialCategories";
-import IFetchContent, { CacheKey } from "./interfaces/IFetchContent";
+import IFetchContent, { MyCategory } from "./interfaces/IFetchContent";
+import logger from './utils/logger';
 
-type FetchFunction<CacheKey> = () => Promise<CacheKey>;
+type FetchFunction<MyCategory> = () => Promise<MyCategory>;
 
 class Seeder {
     private mainLib: IFetchContent; 
@@ -16,7 +17,7 @@ class Seeder {
         this.dbClient = dbClient;
     }
 
-    private fetchFunctions: { [key in CategoryEnum]: FetchFunction<CacheKey | null> } = {
+    private fetchFunctions: { [key in CategoryEnum]: FetchFunction<MyCategory | null> } = {
         [CategoryEnum.JOKE]: () => this.mainLib.getJoke(),
         [CategoryEnum.COMIC]: () => this.mainLib.getCalvinAndHobbes(),
         [CategoryEnum.FACT]: () => this.mainLib.getFact(),
@@ -33,7 +34,7 @@ class Seeder {
     };
 
     // Fetch only a single category without seeding
-    public async fetchOnly(category: CategoryEnum): Promise<CacheKey | null> {
+    public async fetchOnly(category: CategoryEnum): Promise<MyCategory | null> {
         const result = await this.fetchFunctions[category]();
         return result;
     }
@@ -58,7 +59,7 @@ class Seeder {
         const result = await this.fetchFunctions[category]();
 
         if (result) {
-            const newEntry = await this.dbClient.entry.create({
+            await this.dbClient.entry.create({
                 data: {
                     datetime: new Date(),
                     day: "", // Deprecated
@@ -67,7 +68,7 @@ class Seeder {
                 }
             });
         } else {
-            console.warn(`No content fetched for category ${category}, skipping DB insert.`);
+            logger.warn('No content fetched for category %s, skipping DB insert.', category);
         }
     } 
 

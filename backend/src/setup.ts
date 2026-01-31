@@ -3,6 +3,7 @@ import { initialCategories } from "./helpers/initialCategories";
 import JokeLib from "./libs/jokeLib";
 import ContentFetcher from "./contentFetcher";
 import NinjaApi from "./helpers/ninjaApi";
+import ArtApi from "./helpers/artApi";
 import { Config } from './config';
 import { Category } from "./classes/category";
 import QuoteLib from "./libs/quoteLib";
@@ -10,12 +11,10 @@ import RiddleLib from "./libs/riddleLib";
 import PoemLib from "./libs/poemLib";
 import PoemApi from "./helpers/poemApi";
 import TropeLib from "./libs/tropeLib";
-import TropeApi from "./helpers/tropeApi";
 import FactLib from "./libs/factLib";
-import UnsplashApi from "./helpers/unsplashApi";
 import PictureLib from "./libs/pictureLib";
 import QuizLib from "./libs/quizLib";
-import AuthLib from "./authLib";
+import AuthLib from "./utils/authLib";
 import Seeder from "./seeder";
 
 import { OAuth2Client } from 'google-auth-library';
@@ -37,7 +36,8 @@ interface Services {
 function setup(config: Config): Services {
     const ninjaApi = new NinjaApi(config.ninjasApiKey);
     const poemApi = new PoemApi();
-    const tropeApi = new TropeApi();
+    const artApi = new ArtApi();
+
 
     const googleClient = new OAuth2Client(config.googleClientId, config.googleClientSecret, config.googleRedirectURI);
     const authLib = new AuthLib(googleClient);
@@ -48,31 +48,44 @@ function setup(config: Config): Services {
         'https://api.openai.com/v1/chat/completions',
         'gpt-3.5-turbo',
         700,
-        0.8
+        0.85
     );
     const llmApi = new OpenAiApi(openAiOptions);
 
     const quizTopics = [
-        'databases', 
-        'health and nutrition', 
-        'first aid',
-        'dog training',
+        // Health/Life
+        ['nutrition', 'intermediate'], 
+        ['health and exercise', 'intermediate'],
+        ['clinical pathophysiology', 'intermediate'], 
+        ['human anatomy', 'intermediate'], 
+        ['first aid', 'advanced'],
+        ['dog training', 'advanced'],
         
-        'film structure',
-        'film history',
-        'film theory',
+        // Media
+        ['film structure', 'intermediate'],
+        ['film history', 'intermediate'],
+        ['film theory', 'intermediate'],
+        ['Media Analysis', 'intermediate'],
+        ['Media Literacy', 'advanced'],
 
-        'canadian history',
-        'geography',
-        'ancient history',
-        'economics',
-        'canadian politics',
-        'political theory',
-        'nuclear energy and nuclear politics',
+        // Interests
+        ['canadian history', 'advanced'],
+        ['geography', 'advanced'],
+        ['ancient history', 'advanced'],
+        ['economics', 'advanced'],
+        ['canadian politics', 'advanced'],
+        ['political theory', 'advanced'],
+        ['nuclear energy and nuclear politics', 'intermediate'],
+        ['Ethical AI', 'advanced'],
+        ['AI principles', 'advanced'],
 
-        'computer science',
-        'software development',
-        'software cybersecurity',
+        // Tech
+        ['databases', 'intermediate'], 
+        ['computer science', 'expert'],
+        ['software development', 'expert'],
+        ['software design and architecture', 'expert'],
+        ['software cybersecurity', 'advanced'],
+        ['computer networking', 'advanced']
     ];
 
     const tipTopics = [
@@ -91,13 +104,13 @@ function setup(config: Config): Services {
         new QuoteLib(ninjaApi),
         new RiddleLib(ninjaApi),
         new PoemLib(poemApi),
-        new TropeLib(tropeApi),
+        new TropeLib(),
         new FactLib(ninjaApi),
         new PictureLib(),
         new QuizLib(llmApi, quizTopics),
         new TipLib(llmApi, tipTopics),
         new RecipeLib(llmApi, cuisinePrompts),
-        new ArtLib(),
+        new ArtLib(artApi),
         new MusicLib(llmApi, genrePrompts)
     );
 

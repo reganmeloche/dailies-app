@@ -1,5 +1,6 @@
 import Recipe from '../classes/recipe';
 import { ILlmApi } from '../helpers/llmApi';
+import logger from '../utils/logger';
 
 export interface IRecipeLib {
     fetchRecipe(): Promise<Recipe | null>;
@@ -24,6 +25,7 @@ class RecipeLib implements IRecipeLib {
             - For most recipes, use common, recognizable ingredients (no specialty or obscure items).
             - Each recipe must clearly include one primary protein, one primary carbohydrate, and at least one vegetable. 
             - Use a mix of different proteins, carbohydrates, and vegetables across recipes; avoid repetition where possible. 
+            - Do NOT give too many recipes that would be for beginners, or from a top-10 list. (1-2 are okay)
             - Output requirements: Provide only valid JSON. Do not include explanations, markdown, or extra text. 
             - Recipe name must be 2-12 words. Description must be 20-30 words. 
             - Descriptions should be written in a neutral, informative tone (not marketing language). 
@@ -35,7 +37,7 @@ class RecipeLib implements IRecipeLib {
             const response = await this._llmApi.query(prompt); 
             return JSON.parse(response) as Recipe;
         } catch (error){
-            console.log('ERROR fetching recipe', error);
+            logger.error('Error fetching recipe', { error });
             return null;
         }
     }

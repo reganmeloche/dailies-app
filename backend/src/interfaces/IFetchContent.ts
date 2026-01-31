@@ -13,7 +13,7 @@ import Art from '../classes/art';
 import Music from '../classes/music';
 
 
-export type CacheKey = Joke | Riddle | Poem | Quote | Fact | CalvinAndHobbes | 
+export type MyCategory = Joke | Riddle | Poem | Quote | Fact | CalvinAndHobbes | 
     Trope | Picture | Quiz | Tip | Recipe | Art | Music;
 
 export default interface IFetchContent {

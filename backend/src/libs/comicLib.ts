@@ -1,4 +1,5 @@
 import CalvinAndHobbes from '../classes/calvinAndHobbes';
+import logger from '../utils/logger';
 
 export interface IComicLib {
     fetchComic(): Promise<CalvinAndHobbes | null>;
@@ -6,7 +7,7 @@ export interface IComicLib {
 
 class ComicLib implements IComicLib {
     public async fetchComic(): Promise<CalvinAndHobbes | null> {
-        console.error('Error fetching or parsing comic - Not implemented');
+        logger.warn('Comic API Not implemented');
         return null;
   }
 }

@@ -1,6 +1,7 @@
 import { CategoryEnum } from './helpers/initialCategories';
 import { PrismaClient } from '@prisma/client';
 
+import { MyCategory } from './interfaces/IFetchContent';
 import { sampleArt } from './classes/art';
 import { sampleJokes } from './classes/joke';
 import { sampleComic } from './classes/calvinAndHobbes';
@@ -15,10 +16,11 @@ import { sampleTip } from './classes/tip';
 import { sampleRecipe } from './classes/recipe';
 import { sampleMusic } from './classes/music';
 
+
 // For retrieving stored content
 class ContentStorage {
     private dbClient: PrismaClient;
-    private sampleData: { [key in CategoryEnum]: any };
+    private sampleData: { [key in CategoryEnum]: MyCategory };
     
     constructor(dbClient:PrismaClient) {
         this.dbClient = dbClient;
@@ -40,7 +42,7 @@ class ContentStorage {
         };
     }
 
-    public async get(category:CategoryEnum): Promise<any> {
+    public async get(category:CategoryEnum): Promise<MyCategory> {
         const categoryKey: string = category; 
 
         const record = await this.dbClient.entry.findFirst({
@@ -48,8 +50,8 @@ class ContentStorage {
             orderBy: { datetime: 'desc' },
         });
 
-        if (record) {
-            return JSON.parse(record?.content! as string);
+        if (record && record.content) {
+            return JSON.parse(record.content as string);
         } else {
             // Maybe we just want to send error...?
             return JSON.parse(JSON.stringify(this.sampleData[category]));

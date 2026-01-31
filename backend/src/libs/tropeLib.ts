@@ -1,20 +1,13 @@
 import Trope from '../classes/trope';
-import ITropeApi from '../helpers/tropeApi';
+import logger from '../utils/logger';
 
 export interface ITropeLib {
     fetchTrope(): Promise<Trope | null>;
 } 
 
 class TropeLib implements ITropeLib {
-    private api: ITropeApi;
-
-    constructor(api: ITropeApi) {
-        this.api = api;
-    }
-
-    // Use TV tropes (Needs fixing)
     public async fetchTrope(): Promise<Trope | null> {
-        console.error('Error fetching or parsing trope - Not implemented');
+        logger.warn('Trope API not implemented');
         return null;
     }
 }

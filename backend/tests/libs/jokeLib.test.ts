@@ -21,8 +21,7 @@ describe('JokeLib Tests', () => {
         ];
         api.fetch.mockResolvedValue(testApiValue);
         const result = await sut.fetchJoke();
-        expect(result.question).toEqual('When putting cheese in a mousetrap, always leave room for the mouse.');
+        expect(result!.question).toEqual('When putting cheese in a mousetrap, always leave room for the mouse.');
         expect(api.fetch).toHaveBeenCalled();
     });
-
 });

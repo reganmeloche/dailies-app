@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 
 export interface INinjaApi {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     fetch(category: string): Promise<any>;
 } 
 
@@ -13,6 +14,7 @@ class NinjaApi implements INinjaApi {
         this.apiKey = apiKey;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public async fetch(category: string): Promise<any> {
         const response: AxiosResponse = await axios.get(`${this.baseUrl}/${category}`, {
             headers: {

@@ -1,4 +1,5 @@
 import Picture from '../classes/picture';
+import logger from '../utils/logger';
 
 export interface IPictureLib {
     fetchPicture(): Promise<Picture | null>;
@@ -30,7 +31,7 @@ class PictureLib implements IPictureLib {
                 throw new Error('No image found in response');
             }
         } catch (error){
-            console.log('ERROR fetching picture', error);
+            logger.error('Error fetching picture', { error });
             return null;
         }
     }    
